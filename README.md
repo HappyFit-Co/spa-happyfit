@@ -1,2 +1,2 @@
-# HappyFit-FE
+# FrontEnd HappyFit
 FrontEnd do projeto HappyFit.
