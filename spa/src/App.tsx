@@ -1,4 +1,4 @@
-import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './routes';
 import { AppThemeProvider, DrawerProvider } from './shared/contexts';
