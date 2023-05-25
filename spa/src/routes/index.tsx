@@ -8,7 +8,6 @@ import { MenuLateral } from '../shared/components';
 import { Dashboard, Register } from '../pages';
 
 export const AppRoutes = () => {
-    const { toggleDrawerOpen } = useDrawerContext();
 
     return (
         <Routes>
@@ -16,6 +15,8 @@ export const AppRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/agua" element={<Dashboard />} />
+            <Route path="/comida" element={<Dashboard />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
     );

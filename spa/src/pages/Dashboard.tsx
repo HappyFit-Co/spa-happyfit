@@ -8,6 +8,7 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { Nav } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function initTabsNewAnim() {
     var tabsNewAnim = $("#navbarSupportedContent");
@@ -90,22 +91,22 @@ export const Dashboard = () => {
                             <div className="right"></div>
                         </div>
                         <li className="nav-item">
-                            <a className="nav-link" href="javascript:void(0);">
+                            <Link to="/agua" className="nav-link">
                                 <i className="far fa-address-book"></i>
                                 <LocalDrinkIcon />
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link" href="javascript:void(0);">
+                            <Link to="/exercicios" className="nav-link">
                                 <i className="far fa-clone"></i>
                                 <FitnessCenterIcon />
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="javascript:void(0);">
+                            <Link to="/comida" className="nav-link">
                                 <i className="far fa-calendar-alt"></i>
                                 <RestaurantIcon />
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -122,7 +123,9 @@ export const Dashboard = () => {
                     </Nav>
                 </div >
             </nav >
-
+            <div className="">
+                
+            </div>
         </>
     );
 };
