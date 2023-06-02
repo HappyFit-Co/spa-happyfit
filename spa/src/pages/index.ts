@@ -1,5 +1,6 @@
 export { default as Login } from './Login';
-export { default as Register } from './Register';
-export { Dashboard } from './Dashboard';
-export { Agua } from './Agua';
-export { Comida } from './Comida';
+export { default as Registro } from './Registro';
+export { default as Dashboard } from './Dashboard';
+export { default as Hidratacao } from './Hidratacao';
+export { default as Nutricao } from './Nutricao';
+export { default as Treinamento } from './Treinamento';

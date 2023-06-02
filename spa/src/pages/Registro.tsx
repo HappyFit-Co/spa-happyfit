@@ -4,7 +4,7 @@ import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
 import {Lock, Mail, Person } from '@mui/icons-material';
 
-const Register = () => {
+const Registro = () => {
   return (
     <Grid container bgcolor="#38383A" sx={{
       backgroundImage: `url(${backgroundImage})`,
@@ -108,4 +108,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Registro;

@@ -1,23 +1,17 @@
-import React from 'react';
-import { Button, Icon } from '@mui/material';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from '../pages/Login';
 
-import { useDrawerContext } from '../shared/contexts';
-import { MenuLateral } from '../shared/components';
-import { Dashboard, Register } from '../pages';
+import { Login, Registro, Hidratacao, Treinamento, Nutricao } from '../pages';
 
 export const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/agua" element={<Dashboard />} />
-            <Route path="/comida" element={<Dashboard />} />
+            <Route path="/register" element={<Registro />} />
             <Route path="*" element={<Navigate to="/dashboard" />} />
+            <Route path="/hidratacao" element={<Hidratacao />} />
+            <Route path="/treinamento" element={<Treinamento />} />
+            <Route path="/nutricao" element={<Nutricao />} />
         </Routes>
     );
 };
