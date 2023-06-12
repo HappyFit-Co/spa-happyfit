@@ -1,8 +1,7 @@
+import { Lock, Mail, Person } from '@mui/icons-material';
 import { Avatar, Box, Button, Grid, InputAdornment, Link, TextField, Typography } from '@mui/material';
-import React from 'react';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
-import {Lock, Mail, Person } from '@mui/icons-material';
 
 const Registro = () => {
   return (
@@ -33,7 +32,7 @@ const Registro = () => {
               src= {logoImage}
               variant="rounded"
               sx={{
-                width: '35vh',
+                width: 'fit-content',
                 height:'30vh',
               }}
             />

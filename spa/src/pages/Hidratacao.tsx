@@ -3,9 +3,9 @@
 const Hidratacao = () => {
     return (
         <>
-        <div className="Box">
-            aaa
-        </div>
+            <div className="Box">
+                aaa
+            </div>
         </>
     );
 };
