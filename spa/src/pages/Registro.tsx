@@ -26,17 +26,18 @@ const Registro = () => {
           justifyContent='center'
           borderRadius='0 0 3% 3%'
         >
-          <Box margin='0 0 10vh 0' display='flex' flexDirection='column' alignItems='center'>
+          <Box margin='0 0 10vh 0' display='flex' flexDirection='column'>
             <Avatar
               alt="Logo"
               src= {logoImage}
               variant="rounded"
               sx={{
                 width: 'fit-content',
-                height:'30vh',
+                height:'20vh',
+                alignSelf: 'center'
               }}
             />
-            <Typography variant="h1" color='#38383A' fontSize='5vh' fontWeight='200'>Cadastrar</Typography>
+            <Typography variant="h1" color='#666666' fontSize='4vh' fontWeight='600' paddingTop="2vh">Cadastrar</Typography>
             <TextField
               id="outlined-basic"
               label="Nome"

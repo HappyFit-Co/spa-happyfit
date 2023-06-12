@@ -2,6 +2,9 @@ import { createTheme } from '@mui/material';
 import { cyan, orange} from '@mui/material/colors';
 
 export const LightTheme = createTheme({
+    typography: {
+        fontFamily: 'Montserrat'
+    },
     palette: {
         primary: {
             main: orange[400],
