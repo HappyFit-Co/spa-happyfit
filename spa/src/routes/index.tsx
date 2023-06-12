@@ -4,7 +4,7 @@ import { Dashboard, Hidratacao, Informacoes, Login, Nutricao, Registro, Treiname
 
 // Componentizar
 const verificadorLogin = ()=>{
-    return true;
+    return false;
 } 
 
 // Componentizar
