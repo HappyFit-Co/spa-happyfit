@@ -1,4 +1,4 @@
-import { Lock, Person } from '@mui/icons-material';
+import { Lock, Mail, Person } from '@mui/icons-material';
 import { Avatar, Box, Button, Checkbox, FormControlLabel, Grid, InputAdornment, Link, TextField, Typography } from '@mui/material';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
@@ -21,27 +21,28 @@ const Login = () => {
           justifyContent='center'
           borderRadius='0 0 3% 0'
         >
-          <Box margin='0 0 10vh 0' display='flex' flexDirection='column' alignItems='center'>
+          <Box margin='0 0 10vh 0' display='flex' flexDirection='column' >
             <Avatar
               alt="Logo"
               src= {logoImage}
               variant="rounded"
               sx={{
                 width: 'fit-content',
-                height:'30vh',
+                height:'20vh',
+                alignSelf: "center"
               }}
             />
-            <Typography variant="h1" color='#38383A' fontSize='5vh' fontWeight='200'>Login</Typography>
+            <Typography variant="h1" color='#666666' fontSize='4vh' fontWeight='600' paddingTop="2vh" alignSelf="left">Login</Typography>
             <TextField
               id="outlined-basic"
-              label="Nome"
+              label="Email"
               variant="outlined"
               margin='normal'
               type='required'
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Person />
+                    <Mail />
                   </InputAdornment>
                 ),
               }}
@@ -66,14 +67,9 @@ const Login = () => {
                 width: '100%',
               }}
             />
-            <FormControlLabel
-              control={
-                <Checkbox name="rememberMe" />
-              }
-              label="Lembre de mim"
-            />
+            
             <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%' }}>Entrar</Button>
-            <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2}>
+            <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2} alignSelf="center">
               Novo por aqui?{' '}
               <Link href="register" underline="none">
                 Crie uma conta
