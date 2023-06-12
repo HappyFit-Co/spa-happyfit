@@ -13,13 +13,14 @@ const Login = () => {
     }}>
       <Grid item xs={5}>
         <Box
-          height="100vh"
+          height="98vh"
           bgcolor="#F7F7F7"
           display='flex'
           flexDirection='column'
           alignItems='center'
           justifyContent='center'
           borderRadius='0 0 3% 0'
+          marginBottom='2vh'
         >
           <Box margin='0 0 10vh 0' display='flex' flexDirection='column' >
             <Avatar
@@ -68,7 +69,7 @@ const Login = () => {
               }}
             />
             
-            <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%' }}>Entrar</Button>
+            <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%', '&:hover': {color: 'white'} }}>Entrar</Button>
             <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2} alignSelf="center">
               Novo por aqui?{' '}
               <Link href="register" underline="none">
