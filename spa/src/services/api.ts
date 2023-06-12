@@ -8,7 +8,7 @@ export function setupApiClient(ctx = undefined) {
   let cookies = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: 'http://chefconnect-backend.vercel.app',
+    baseURL: 'http://localhost:8080',
     headers: {
       Authorization: `Bearer ${cookies['@auth.token']}`
     }

@@ -8,29 +8,28 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const navigate = useNavigate();
 
-type UserProps = {
-    id: string
+type userProps = {
     name: string
     email: string
 }
 
-type SignInProps = {
+type loginProps = {
     email: string
-    password: string
+    pwd: string
 }
 
-type SignUpProps = {
-    email: string
+type logoutProps = {
+    SignUpPropsemail: string
     password: string
     name: string
 }
 
 type AuthContextData = {
-    user: UserProps
+    user: userProps
     isAuthenticated: boolean
-    signIn: (credentials: SignInProps) => Promise<void>
+    register: (credentials: loginProps) => Promise<void>
     singOut: () => void
-    singUp: (credentials: SignUpProps) => Promise<void>
+    singUp: (credentials: logoutProps) => Promise<void>
 }
 
 type AuthProviderProps = {
@@ -49,48 +48,33 @@ export function logout() {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<UserProps>()
+    const [user, setUser] = useState<userProps>()
     const isAuthenticated = !!user
 
     useEffect(() => {
         const { '@auth.token': token } = parseCookies()
 
         if (token) {
-            api.get('/me').then(response => {
-                const { id, name, email } = response.data
-                setUser({
-                    id,
-                    name,
-                    email
-                })
-
-            }).catch(() => {
+            api.get('/me').catch(() => {
                 logout()
             })
         }
     }, [])
 
-    async function signIn({ email, password }: SignInProps) {
+    async function login({ email, pwd }: loginProps) {
         await new Promise(r => setTimeout(r, 500));
         try {
-            const response = await api.post('/auth', { email, password })
-            const { id, name, token } = response.data
+            const response = await api.post('/auth', { email, pwd })
+            const { access_token } = response.data
 
             //SETANDO TOKEN NOS COOKIES PARA PODER USAR AO ENTRAR NO APP NOVAMENTE
-            setCookie(undefined, '@auth.token', token, {
-                maxAge: 60 * 60 * 24 * 30, // COOKIES VAI EXPIRAR EM 1 MES
+            setCookie(undefined, '@auth.token', access_token, {
+                maxAge: 60 * 60 * 24 * 2, // COOKIES VAI EXPIRAR EM 2 DIAS
                 path: '/'
             })
 
-            //SALVANDO INFOS DO USER NO USESTATE DO CONTEXT
-            setUser({
-                id,
-                name,
-                email
-            })
-
             //COLOCANDO TOKEN DENTRO DO OBJETO DA API
-            api.defaults.headers['Authorization'] = `Bearer ${token}`
+            api.defaults.headers['Authorization'] = `Bearer ${access_token}`
 
             //REDIRECIONAR PARA ABA PEDIDOS
             navigate('/dashboard')
@@ -107,10 +91,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
-    async function singUp({ name, email, password }: SignUpProps) {
+
+    async function register({ name, email, password, weight, height, birthday, activity_level }: any) {
         await new Promise(r => setTimeout(r, 500))
         try {
-            await api.post('/users', { name, email, password })
+            await api.post('/users', { name, email, password, weight, height, birthday, activity_level })
             navigate('/')
         } catch (err: any) {
             if (err.name === "TypeError") {
@@ -124,7 +109,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, logout, singUp } as any}>
+        <AuthContext.Provider value={{ user, isAuthenticated, login, logout, register } as any}>
             {children}
         </AuthContext.Provider>
     )
