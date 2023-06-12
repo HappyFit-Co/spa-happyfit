@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Dashboard, Hidratacao, Login, Nutricao, Registro, Treinamento } from '../pages';
+import { Dashboard, Hidratacao, Informacoes, Login, Nutricao, Registro, Treinamento } from '../pages';
 
 // Componentizar
 const verificadorLogin = ()=>{
-    return false;
+    return true;
 } 
 
 // Componentizar
@@ -31,6 +31,8 @@ export const AppRoutes = () => {
             <Route path="/hidratacao" element={<PrivadoHook Page={Hidratacao} />} />
             <Route path="/treinamento" element={<PrivadoHook Page={Treinamento} />} />
             <Route path="/nutricao" element={<PrivadoHook Page={Nutricao} />} />
+            <Route path="/informacoes" element={<PublicoHook Page={Informacoes} />} />
+
         </Routes>
     );
 };
