@@ -1,26 +1,23 @@
+import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
+import { AuthContext } from '../contexts/AuthContext';
 import { Dashboard, Hidratacao, Informacoes, Login, Nutricao, Registro, Treinamento } from '../pages';
 
-// Componentizar
-const verificadorLogin = ()=>{
-    return false;
-} 
 
-// Componentizar
-const PrivadoHook = ({ Page }: any) => {
-    const logado = verificadorLogin();
-    return logado ? <Page /> : <Navigate to="/login" />;
-}
-
-// Componentizar
-const PublicoHook = ({ Page }: any) => {
-    const logado = verificadorLogin();
-
-    return logado ? <Navigate to="/dashboard" /> : <Page />;
-}
 
 export const AppRoutes = () => {
+
+    // Componentizar
+    const PrivadoHook = ({ Page }: any) => {
+        const { isAuthenticated } = useContext(AuthContext);
+        return isAuthenticated ? <Page /> : <Navigate to="/login" />;
+    }
+
+    // Componentizar
+    const PublicoHook = ({ Page }: any) => {
+        const { isAuthenticated } = useContext(AuthContext);
+        return isAuthenticated ? <Navigate to="/dashboard" /> : <Page />;
+    }
 
     return (
         <Routes>
@@ -32,7 +29,6 @@ export const AppRoutes = () => {
             <Route path="/treinamento" element={<PrivadoHook Page={Treinamento} />} />
             <Route path="/nutricao" element={<PrivadoHook Page={Nutricao} />} />
             <Route path="/informacoes" element={<PublicoHook Page={Informacoes} />} />
-
         </Routes>
     );
 };

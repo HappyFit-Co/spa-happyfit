@@ -1,9 +1,45 @@
-import { Lock, Mail, Person } from '@mui/icons-material';
-import { Avatar, Box, Button, Checkbox, FormControlLabel, Grid, InputAdornment, Link, TextField, Typography } from '@mui/material';
+import { Lock, Mail } from '@mui/icons-material';
+import { Avatar, Box, Button, Grid, InputAdornment, Link, TextField, Typography } from '@mui/material';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [pwd, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const { login } = useContext(AuthContext);
+
+  const navigate = useNavigate()
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  async function hadleLogin() {
+    if(email === '' || pwd === ''){
+       setError('Preencha os campos email / senha')
+       return
+    }
+
+    try {
+      const response = await login({ email, pwd }) as any
+      if (response) {
+        navigate('/dashboard')
+      }
+    } catch (err : any) {
+      setError(err.message)
+    }
+  }
+
+
   return (
     <Grid container bgcolor="#38383A" sx={{
       backgroundImage: `url(${backgroundImage})`,
@@ -24,16 +60,18 @@ const Login = () => {
           <Box margin='0 0 10vh 0' display='flex' flexDirection='column' >
             <Avatar
               alt="Logo"
-              src= {logoImage}
+              src={logoImage}
               variant="rounded"
               sx={{
                 width: 'fit-content',
-                height:'20vh',
+                height: '20vh',
                 alignSelf: "center"
               }}
             />
             <Typography variant="h1" color='#666666' fontSize='4vh' fontWeight='600' paddingTop="2vh" alignSelf="left">Login</Typography>
             <TextField
+              error={!!error}
+              onChange={handleEmailChange}
               id="outlined-basic"
               label="Email"
               variant="outlined"
@@ -51,6 +89,8 @@ const Login = () => {
               }}
             />
             <TextField
+              error={!!error}
+              onChange={handlePasswordChange}
               id="outlined-basic"
               label="Senha"
               variant="outlined"
@@ -67,8 +107,8 @@ const Login = () => {
                 width: '100%',
               }}
             />
-            
-            <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%' }}>Entrar</Button>
+            <Typography color='red'>{error}</Typography>
+            <Button onClick={hadleLogin} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%' }}>Entrar</Button>
             <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2} alignSelf="center">
               Novo por aqui?{' '}
               <Link href="register" underline="none">
@@ -76,6 +116,7 @@ const Login = () => {
               </Link>
             </Typography>
           </Box>
+          
         </Box>
       </Grid>
       <Grid item xs={6}>

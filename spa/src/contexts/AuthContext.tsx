@@ -1,12 +1,7 @@
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 
 import { api } from '../services/apiClient';
-
-import 'react-toastify/dist/ReactToastify.css';
-
-const navigate = useNavigate();
 
 type userProps = {
     name: string
@@ -18,85 +13,91 @@ type loginProps = {
     pwd: string
 }
 
-type logoutProps = {
-    SignUpPropsemail: string
-    password: string
+type registerProps = {
     name: string
+	email: string
+	pwd: string
+	weight: number
+	height: number
+	birthday: string
+	activity_level: string
 }
 
 type AuthContextData = {
     user: userProps
     isAuthenticated: boolean
-    register: (credentials: loginProps) => Promise<void>
-    singOut: () => void
-    singUp: (credentials: logoutProps) => Promise<void>
+    login: (credentials: loginProps) => Promise<void>
+    logout: () => void
+    register: (credentials: registerProps) => Promise<void>
 }
 
 type AuthProviderProps = {
     children: ReactNode
 }
 
-export function logout() {
-    try {
-        destroyCookie(undefined, '@auth.token')
-        navigate('/')
-    } catch {
-
-    }
-}
-
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<userProps>()
-    const isAuthenticated = !!user
+    const [isAuthenticated, setIsAuthenticated] = useState<any>(false)
 
     useEffect(() => {
         const { '@auth.token': token } = parseCookies()
 
         if (token) {
-            api.get('/me').catch(() => {
+            console.log(api.defaults.headers['Authorization'])
+            api.get('/users')
+            .then(setIsAuthenticated(true) as any)
+            .catch((err) => {
                 logout()
             })
+            
         }
     }, [])
 
-    async function login({ email, pwd }: loginProps) {
-        await new Promise(r => setTimeout(r, 500));
+    async function logout() {
         try {
-            const response = await api.post('/auth', { email, pwd })
+            
+            destroyCookie(undefined, '@auth.token')
+            setIsAuthenticated(false)
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    async function login({ email, pwd }: loginProps) {
+        await new Promise(r => setTimeout(r, 100));
+        try {
+            const response = await api.post('/users/login', { email, pwd })
             const { access_token } = response.data
 
-            //SETANDO TOKEN NOS COOKIES PARA PODER USAR AO ENTRAR NO APP NOVAMENTE
             setCookie(undefined, '@auth.token', access_token, {
                 maxAge: 60 * 60 * 24 * 2, // COOKIES VAI EXPIRAR EM 2 DIAS
                 path: '/'
             })
 
-            //COLOCANDO TOKEN DENTRO DO OBJETO DA API
             api.defaults.headers['Authorization'] = `Bearer ${access_token}`
-
-            //REDIRECIONAR PARA ABA PEDIDOS
-            navigate('/dashboard')
+        
+            setIsAuthenticated(true)
+            return true
 
         } catch (err: any) {
             if (err.name === "TypeError") {
-                throw new Error("ERRO DE CONEXÃO 🌐")
+                throw new Error(err+"ERRO DE CONEXÃO 🌐")
             } else if (err.name === "AxiosError") {
-                throw new Error("Usuário/Senha incorreto(s)")
+                throw new Error(err+"Usuário/Senha incorreto(s)")
             } else {
                 throw new Error(err)
             }
-
         }
     }
-
 
     async function register({ name, email, password, weight, height, birthday, activity_level }: any) {
         await new Promise(r => setTimeout(r, 500))
         try {
             await api.post('/users', { name, email, password, weight, height, birthday, activity_level })
-            navigate('/')
+            setIsAuthenticated(true)
+            return true
         } catch (err: any) {
             if (err.name === "TypeError") {
                 throw new Error("ERRO DE CONEXÃO 🌐")
@@ -109,7 +110,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, login, logout, register } as any}>
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, register } as any}>
             {children}
         </AuthContext.Provider>
     )

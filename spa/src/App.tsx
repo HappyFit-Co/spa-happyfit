@@ -1,8 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
 // import './shared/forms/TraducoesYup';
+import { AuthProvider } from './contexts/AuthContext';
 import { AppRoutes } from './routes';
 import { AppThemeProvider, DrawerProvider } from './shared/contexts';
-// import { AuthProvider } from '';
 
 
 export const App = () => {
@@ -10,7 +10,9 @@ export const App = () => {
     <AppThemeProvider>
       <DrawerProvider>
         <BrowserRouter>
-          <AppRoutes />
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
         </BrowserRouter>
       </DrawerProvider>
     </AppThemeProvider>
