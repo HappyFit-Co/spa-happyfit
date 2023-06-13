@@ -3,6 +3,25 @@ import { Avatar, Box, Button, Grid, InputAdornment, Link, TextField, Typography 
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
 
+
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
+
+function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ width: '100%', mr: 1, margin: '4vh 0 0 0' }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35, margin: '4vh 0 0 1vh' }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value,
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+
 const Registro = () => {
   return (
     <Grid container bgcolor="#38383A" sx={{
@@ -89,13 +108,14 @@ const Registro = () => {
                 width: '100%',
               }}
             />
-            <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%' }}>Próximo</Button>
+            <Button href="informacoes" variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%', '&:hover': {color: 'white'}}}>Próximo</Button>
             <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2}>
               Já possui uma conta?{' '}
               <Link href="login" underline="none">
                 Faça Login
               </Link>
             </Typography>
+            <LinearProgressWithLabel variant='determinate' value={10}/>
           </Box>
         </Box>
       </Grid>
