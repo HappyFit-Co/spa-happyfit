@@ -15,12 +15,13 @@ type loginProps = {
 
 type registerProps = {
     name: string
-	email: string
-	pwd: string
-	weight: number
-	height: number
-	birthday: string
-	activity_level: string
+    email: string,
+    pwd: string,
+    weight: number,
+    height: number,
+    birthday: string,
+    sex: string,
+    activity_level: string
 }
 
 type AuthContextData = {
@@ -40,23 +41,23 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState<any>(false)
 
+
     useEffect(() => {
         const { '@auth.token': token } = parseCookies()
 
         if (token) {
-            console.log(api.defaults.headers['Authorization'])
-            api.get('/users')
-            .then(setIsAuthenticated(true) as any)
-            .catch((err) => {
-                logout()
-            })
-            
+            api.get('/users/')
+                .then(setIsAuthenticated(true) as any)
+                .catch((err) => {
+                    logout()
+                })
+
         }
     }, [])
 
     async function logout() {
         try {
-            
+
             destroyCookie(undefined, '@auth.token')
             setIsAuthenticated(false)
             return true
@@ -69,6 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await new Promise(r => setTimeout(r, 100));
         try {
             const response = await api.post('/users/login', { email, pwd })
+            alert()
             const { access_token } = response.data
 
             setCookie(undefined, '@auth.token', access_token, {
@@ -77,15 +79,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
             })
 
             api.defaults.headers['Authorization'] = `Bearer ${access_token}`
-        
+
             setIsAuthenticated(true)
             return true
 
         } catch (err: any) {
             if (err.name === "TypeError") {
-                throw new Error(err+"ERRO DE CONEXÃO 🌐")
+                throw new Error(err + "ERRO DE CONEXÃO 🌐")
             } else if (err.name === "AxiosError") {
-                throw new Error(err+"Usuário/Senha incorreto(s)")
+                throw new Error(err + "Usuário/Senha incorreto(s)")
             } else {
                 throw new Error(err)
             }
@@ -95,7 +97,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async function register({ name, email, password, weight, height, birthday, activity_level }: any) {
         await new Promise(r => setTimeout(r, 500))
         try {
-            await api.post('/users', { name, email, password, weight, height, birthday, activity_level })
+            await api.post('/users/', { name, email, password, weight, height, birthday, activity_level })
             setIsAuthenticated(true)
             return true
         } catch (err: any) {

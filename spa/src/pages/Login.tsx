@@ -11,7 +11,7 @@ const Login = () => {
   const [pwd, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const { login } = useContext(AuthContext);
+  const { register } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -24,17 +24,24 @@ const Login = () => {
   };
 
   async function hadleLogin() {
-    if(email === '' || pwd === ''){
-       setError('Preencha os campos email / senha')
-       return
+    if (email === '' || pwd === '') {
+      setError('Preencha os campos email / senha')
+      return
     }
 
     try {
-      const response = await login({ email, pwd }) as any
+      const response = await register({  "name": "Teste",
+      "email": "tamili@gmail.com",
+      "pwd": "12345678",
+      "weight": 70.5,
+      "height": 1.75,
+      "birthday": "2022-12-12",
+      "sex": "Masculino",
+      "activity_level": "active" }) as any
       if (response) {
         navigate('/dashboard')
       }
-    } catch (err : any) {
+    } catch (err: any) {
       setError(err.message)
     }
   }
@@ -109,7 +116,7 @@ const Login = () => {
               }}
             />
             <Typography color='red'>{error}</Typography>
-            <Button onClick={hadleLogin} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': {color: 'white'} }}>Entrar</Button>
+            <Button onClick={hadleLogin} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Entrar</Button>
             <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2} alignSelf="center">
               Novo por aqui?{' '}
               <Link href="register" underline="none">
@@ -117,7 +124,7 @@ const Login = () => {
               </Link>
             </Typography>
           </Box>
-          
+
         </Box>
       </Grid>
       <Grid item xs={6}>
