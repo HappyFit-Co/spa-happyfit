@@ -1,13 +1,19 @@
-import { AppBar, Avatar, Toolbar, Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
-import logoImage from '../assets/images/logo_happy.png';
 import { AccountCircle } from "@mui/icons-material";
-import {useState} from "react";
+import { AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
+import { useContext, useState } from "react";
+import logoImage from '../assets/images/logo_happy.png';
+import { AuthContext } from "../contexts/AuthContext";
 
 
 const Dashboard = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-   
     const isMenuOpen = Boolean(anchorEl);
+
+    const {logout} = useContext(AuthContext);
+
+    function handleLogout(){
+      logout()
+    }
 
     const handleMenuClose = () => {
         setAnchorEl(null);
@@ -36,6 +42,7 @@ const Dashboard = () => {
         >
           <MenuItem onClick={handleMenuClose} >Profile</MenuItem>
           <MenuItem onClick={handleMenuClose} >My account</MenuItem>
+          <MenuItem onClick={handleLogout} >Sair</MenuItem>
         </Menu>
       );
 
