@@ -57,7 +57,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     async function logout() {
         try {
-
             destroyCookie(undefined, '@auth.token')
             setIsAuthenticated(false)
             return true
@@ -70,7 +69,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await new Promise(r => setTimeout(r, 100));
         try {
             const response = await api.post('/users/login', { email, pwd })
-            alert()
             const { access_token } = response.data
 
             setCookie(undefined, '@auth.token', access_token, {
@@ -84,30 +82,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
             return true
 
         } catch (err: any) {
-            if (err.name === "TypeError") {
-                throw new Error(err + "ERRO DE CONEXÃO 🌐")
-            } else if (err.name === "AxiosError") {
-                throw new Error(err + "Usuário/Senha incorreto(s)")
-            } else {
-                throw new Error(err)
-            }
+            throw new Error(err.response.data.msg)
         }
     }
 
-    async function register({ name, email, password, weight, height, birthday, activity_level }: any) {
-        await new Promise(r => setTimeout(r, 500))
+    async function register({ name, email, pwd, weight, height, birthday, sex, activity_level }: registerProps) {
+        await new Promise(r => setTimeout(r, 100))
         try {
-            await api.post('/users/', { name, email, password, weight, height, birthday, activity_level })
-            setIsAuthenticated(true)
+            const userData = { name, email, pwd, weight, height, birthday, sex, activity_level }
+            await api.post('/users/', userData)
             return true
         } catch (err: any) {
-            if (err.name === "TypeError") {
-                throw new Error("ERRO DE CONEXÃO 🌐")
-            } else if (err.name === "AxiosError") {
-                throw new Error("Email já cadastrado!")
-            } else {
-                throw new Error(err)
-            }
+            throw new Error(err.response.data.message)
         }
     }
 

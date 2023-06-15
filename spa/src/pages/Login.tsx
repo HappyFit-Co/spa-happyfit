@@ -11,7 +11,7 @@ const Login = () => {
   const [pwd, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const { register } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -30,14 +30,7 @@ const Login = () => {
     }
 
     try {
-      const response = await register({  "name": "Teste",
-      "email": "tamili@gmail.com",
-      "pwd": "12345678",
-      "weight": 70.5,
-      "height": 1.75,
-      "birthday": "2022-12-12",
-      "sex": "Masculino",
-      "activity_level": "active" }) as any
+      const response = await login({ email, pwd }) as any
       if (response) {
         navigate('/dashboard')
       }
