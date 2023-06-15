@@ -1,10 +1,11 @@
-import { Lock, Mail, Person } from '@mui/icons-material';
+import { CakeOutlined, Lock, Mail, MonitorWeightOutlined, Person, StraightenOutlined } from '@mui/icons-material';
 import { Avatar, Box, Button, Grid, InputAdornment, Link, TextField, Typography } from '@mui/material';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
 
 
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
+import { useState } from 'react';
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
   return (
@@ -23,109 +24,288 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 
 
 const Registro = () => {
+  const [etapa, setEtapa] = useState(1)
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [sex, setSex] = useState('');
+  const [activityLevel, setActivityLevel] = useState('');
+
+  const handleNomeChange = (event) => {
+    setNome(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePwdChange = (event) => {
+    setPwd(event.target.value);
+  };
+
+  const handleWeightChange = (event) => {
+    setWeight(event.target.value);
+  };
+
+  const handleHeightChange = (event) => {
+    setHeight(event.target.value);
+  };
+
+  const handleBirthdayChange = (event) => {
+    setBirthday(event.target.value);
+  };
+
+  const handleSexChange = (event) => {
+    setSex(event.target.value);
+  };
+
+  const handleActivityLevelChange = (event) => {
+    setActivityLevel(event.target.value);
+  };
+
+  function handleNextStep() {
+    setEtapa(2)
+  }
+
+  function handleBackStep() {
+    setEtapa(1)
+  }
+
+  function handleRegisterUser() {
+    console.log({ nome, email, pwd, weight, height, birthday, sex, activityLevel });
+  }
+
   return (
-    <Grid container bgcolor="#38383A" sx={{
-      backgroundImage: `url(${backgroundImage})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    }}>
-      <Grid item xs={4}>
-        <Box height="100vh" bgcolor="transparent">
-          { }
-        </Box>
-      </Grid>
-      <Grid item xs={4}>
-        <Box
-         height="100vh"
-          bgcolor="#F7F7F7"
-          display='flex'
-          flexDirection='column'
-          alignItems='center'
-          justifyContent='center'
-          borderRadius='0 0 3% 3%'
-        >
-          <Box margin='0 0 10vh 0' display='flex' flexDirection='column'>
-            <Avatar
-              alt="Logo"
-              src= {logoImage}
-              variant="rounded"
-              sx={{
-                width: 'fit-content',
-                height:'20vh',
-                alignSelf: 'center'
-              }}
-            />
-            <Typography variant="h1" color='#666666' fontSize='4vh' fontWeight='600' paddingTop="2vh">Cadastrar</Typography>
-            <TextField
-              id="outlined-basic"
-              label="Nome"
-              variant="outlined"
-              margin='normal'
-              type='required'
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Person />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                width: '100%',
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-              margin='normal'
-              type='required'
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Mail />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                width: '100%',
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Senha"
-              variant="outlined"
-              margin='normal'
-              type='password'
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Lock />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{
-                width: '100%',
-              }}
-            />
-            <Button href="informacoes" variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width:'100%', '&:hover': {color: 'white'}}}>Próximo</Button>
-            <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2}>
-              Já possui uma conta?{' '}
-              <Link href="login" underline="none">
-                Faça Login
-              </Link>
-            </Typography>
-            <LinearProgressWithLabel variant='determinate' value={10}/>
+    etapa === 1 ? (
+      // ETAPA 1
+      <Grid container bgcolor="#38383A" sx={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      }}>
+        <Grid item xs={4}>
+          <Box height="100vh" bgcolor="transparent">
+            { }
           </Box>
-        </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box
+            height="100vh"
+            bgcolor="#F7F7F7"
+            display='flex'
+            flexDirection='column'
+            alignItems='center'
+            justifyContent='center'
+            borderRadius='0 0 3% 3%'
+          >
+            <Box margin='0 0 10vh 0' display='flex' flexDirection='column'>
+              <Avatar
+                alt="Logo"
+                src={logoImage}
+                variant="rounded"
+                sx={{
+                  width: 'fit-content',
+                  height: '20vh',
+                  alignSelf: 'center'
+                }}
+              />
+              <Typography variant="h1" color='#666666' fontSize='4vh' fontWeight='600' paddingTop="2vh">Cadastrar</Typography>
+              <TextField
+                id="nome-field"
+                label="Nome"
+                variant="outlined"
+                margin='normal'
+                type='required'
+                value={nome}
+                onChange={handleNomeChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Person />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  width: '100%',
+                }}
+              />
+              <TextField
+                id="email-field"
+                label="Email"
+                variant="outlined"
+                margin='normal'
+                type='required'
+                value={email}
+                onChange={handleEmailChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Mail />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  width: '100%',
+                }}
+              />
+              <TextField
+                id="senha-field"
+                label="Senha"
+                variant="outlined"
+                margin='normal'
+                type='password'
+                value={pwd}
+                onChange={handlePwdChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Lock />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  width: '100%',
+                }}
+              />
+              <Button onClick={handleNextStep} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Próximo</Button>
+              <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2}>
+                Já possui uma conta?{' '}
+                <Link href="login" underline="none">
+                  Faça Login
+                </Link>
+              </Typography>
+              <LinearProgressWithLabel variant='determinate' value={10} />
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box height="100vh" bgcolor="transparent">
+            { }
+          </Box>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <Box height="100vh" bgcolor="transparent">
-          { }
-        </Box>
+    ) : (
+      // ETAPA 2
+      <Grid container bgcolor="#38383A" sx={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      }}>
+        <Grid item xs={4}>
+          <Box height="100vh" bgcolor="transparent">
+            { }
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box
+            height="98vh"
+            bgcolor="#F7F7F7"
+            display='flex'
+            flexDirection='column'
+            alignItems='center'
+            justifyContent='center'
+            borderRadius='0 0 3% 3%'
+            marginBottom='2vh'
+          >
+            <Box margin='0 0 10vh 0' display='flex' flexDirection='column'>
+              <Avatar
+                alt="Logo"
+                src={logoImage}
+                variant="rounded"
+                sx={{
+                  width: 'fit-content',
+                  height: '20vh',
+                  alignSelf: 'center'
+                }}
+              />
+              <Typography variant="h1" color='#666666' fontSize='3vh' fontWeight='600' paddingTop="2vh">Informações</Typography>
+              <TextField
+                id="birthday-field"
+                key="birthday"
+                label="Data de Aniversário"
+                variant="outlined"
+                margin='normal'
+                type='required'
+                value={birthday}
+                onChange={handleBirthdayChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <CakeOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  width: '100%',
+                }}
+              />
+              <TextField
+                id="altura-field"
+                label="Altura"
+                variant="outlined"
+                margin='normal'
+                type='required'
+                value={height}
+                onChange={handleHeightChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <StraightenOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  width: '100%',
+                }}
+              />
+              <TextField
+                id="peso-field"
+                label="Peso"
+                variant="outlined"
+                margin='normal'
+                type='password'
+                value={weight}
+                onChange={handleWeightChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <MonitorWeightOutlined />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  width: '100%',
+                }}
+              />
+              <Box display="flex" flexDirection="row" gap="1vh">
+                <Button onClick={handleBackStep} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Voltar</Button>
+                <Button onClick={handleRegisterUser} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Finalizar</Button>
+              </Box>
+
+              <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2}>
+                Já possui uma conta?{' '}
+                <Link href="login" underline="none">
+                  Faça Login
+                </Link>
+              </Typography>
+              <LinearProgressWithLabel variant='determinate' value={99} />
+            </Box>
+          </Box>
+        </Grid>
+        <Grid item xs={4}>
+          <Box height="100vh" bgcolor="transparent">
+            { }
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    )
   );
+
 };
 
 export default Registro;
