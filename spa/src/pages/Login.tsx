@@ -1,12 +1,18 @@
 import { Lock, Mail } from '@mui/icons-material';
 import { Avatar, Box, Button, Grid, InputAdornment, Link, TextField, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
 import { AuthContext } from '../contexts/AuthContext';
 
 const Login = () => {
+  const TITULO_PAGINA = "HappyFit - Faça o seu login"
+
+  useEffect(() => {
+    document.title = TITULO_PAGINA
+  }, []);
+
   const [email, setEmail] = useState('');
   const [pwd, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,6 +21,7 @@ const Login = () => {
 
   const navigate = useNavigate()
 
+  // LOGICA DO LOGIN
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -108,7 +115,7 @@ const Login = () => {
                 width: '100%',
               }}
             />
-            <Typography color='red'>{error}</Typography>
+            <Typography textAlign="center" color='red'>{error}</Typography>
             <Button onClick={hadleLogin} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Entrar</Button>
             <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2} alignSelf="center">
               Novo por aqui?{' '}
