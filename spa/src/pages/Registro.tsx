@@ -5,7 +5,7 @@ import logoImage from '../assets/images/logo_happy.png';
 
 
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
   return (
@@ -24,7 +24,15 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 
 
 const Registro = () => {
+  const TITULO_PAGINA = "HappyFit - Registre-se agora"
+
+  useEffect(() => {
+    document.title = TITULO_PAGINA
+  }, []);
+  
+  const [error, setError] = useState('')
   const [etapa, setEtapa] = useState(1)
+
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
@@ -67,14 +75,37 @@ const Registro = () => {
   };
 
   function handleNextStep() {
+    if (nome === '' || email === '' || pwd === '') {
+      setError("Preencha todos os campos")
+      return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      setError("Email inválido")
+      return
+    }
+  
+    if (pwd.length < 8 || !/[a-zA-Z]/.test(pwd)) {
+      setError("Senha inválida. A senha deve ter pelo menos 8 caracteres e conter pelo menos uma letra.")
+      return
+    }
+  
     setEtapa(2)
+    setError('')
   }
 
   function handleBackStep() {
+    setError('')
     setEtapa(1)
   }
 
   function handleRegisterUser() {
+    // ADICIONAR VERIFICAÇÃO DOS OUTROS 2 CAMPOS (SEXO e NIVEL DE ATIVIDADE)
+    if (birthday === '' || weight === '' || height === '') {
+      setError("Preencha todos os campos")
+      return
+    }
     console.log({ nome, email, pwd, weight, height, birthday, sex, activityLevel });
   }
 
@@ -171,6 +202,7 @@ const Registro = () => {
                   width: '100%',
                 }}
               />
+              <Typography width="18vw" textAlign="center" color='red'>{error}</Typography>
               <Button onClick={handleNextStep} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Próximo</Button>
               <Typography variant="body1" color="textSecondary" fontWeight='500' mt={2}>
                 Já possui uma conta?{' '}
@@ -282,6 +314,7 @@ const Registro = () => {
                   width: '100%',
                 }}
               />
+              <Typography width="18vw" textAlign="center" color='red'>{error}</Typography>
               <Box display="flex" flexDirection="row" gap="1vh">
                 <Button onClick={handleBackStep} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Voltar</Button>
                 <Button onClick={handleRegisterUser} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Finalizar</Button>
