@@ -1,5 +1,5 @@
 import { CakeOutlined, Lock, Mail, MonitorWeightOutlined, Person, StraightenOutlined } from '@mui/icons-material';
-import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputAdornment, InputLabel, Link, MenuItem, Radio, RadioGroup, Select, Slider, TextField, Typography } from '@mui/material';
+import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputAdornment, Link, Radio, RadioGroup, Slider, TextField, Typography } from '@mui/material';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
 
@@ -273,6 +273,24 @@ const Registro = () => {
                 }}
               />
               <Typography variant="h1" color='#666666' fontSize='3vh' fontWeight='600' paddingTop="4vh">Informações</Typography>
+              <Typography paddingTop="3vh" variant="body1" color="textSecondary">
+                Nível de atividade:
+              </Typography>
+              <Slider
+                value={sliderValue}
+                onChange={handleSliderChange}
+                min={0}
+                max={2}
+                step={1}
+                sx={{
+                  width: '90%',
+                  alignSelf: 'center'
+                }}
+                marks={sliderLabels.map((label, index) => ({
+                  value: index,
+                  label: label,
+                }))}
+              />
               <TextField
                 id="birthday-field"
                 key="birthday"
@@ -330,24 +348,6 @@ const Registro = () => {
                 sx={{
                   width: '100%',
                 }}
-              />
-              <Typography paddingTop="1vh" variant="body1" color="textSecondary">
-                Nível de atividade:
-              </Typography>
-              <Slider
-                value={sliderValue}
-                onChange={handleSliderChange}
-                min={0}
-                max={2}
-                step={1}
-                sx={{
-                  width: '90%',
-                  alignSelf: 'center'
-                }}
-                marks={sliderLabels.map((label, index) => ({
-                  value: index,
-                  label: label,
-                }))}
               />
               <Typography width="18vw" textAlign="center" color='red'>{error}</Typography>
               <Box paddingTop="3vh" display="flex" flexDirection="row" gap="1vh">
