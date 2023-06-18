@@ -1,4 +1,4 @@
-import { CakeOutlined, Lock, Mail, MonitorWeightOutlined, Person, StraightenOutlined } from '@mui/icons-material';
+import { CakeOutlined, Lock, Mail, MonitorWeightOutlined, Padding, Person, StraightenOutlined } from '@mui/icons-material';
 import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputAdornment, Link, Radio, RadioGroup, Slider, TextField, Typography } from '@mui/material';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
@@ -43,7 +43,7 @@ const Registro = () => {
   const [activityLevel, setActivityLevel] = useState('');
 
   const [sliderValue, setSliderValue] = useState(2); // 0: Baixo, 1: Médio, 2: Alto
-  const sliderLabels = ['Baixo', 'Médio', 'Alto'];
+  const sliderLabels = ['inativo', 'baixo', 'moderado', 'ativo', 'Alto'];
 
   const handleSliderChange = (event, newValue) => {
     setSliderValue(newValue);
@@ -280,10 +280,9 @@ const Registro = () => {
                 value={sliderValue}
                 onChange={handleSliderChange}
                 min={0}
-                max={2}
+                max={4}
                 step={1}
                 sx={{
-                  width: '90%',
                   alignSelf: 'center'
                 }}
                 marks={sliderLabels.map((label, index) => ({
