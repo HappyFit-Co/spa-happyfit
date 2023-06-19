@@ -227,7 +227,7 @@ const Registro = () => {
                   Faça Login
                 </Link>
               </Typography>
-              <LinearProgressWithLabel variant='determinate' value={10} />
+              <LinearProgressWithLabel variant='determinate' value={50} />
             </Box>
           </Box>
         </Grid>
@@ -360,7 +360,7 @@ const Registro = () => {
                   Faça Login
                 </Link>
               </Typography>
-              <LinearProgressWithLabel variant='determinate' value={99} />
+              <LinearProgressWithLabel variant='determinate' value={100} />
             </Box>
           </Box>
         </Grid>
