@@ -93,7 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             await api.post('/users/', userData)
             return true
         } catch (err: any) {
-            throw new Error(err.response.data.message)
+            throw new Error(err.response.data.msg)
         }
     }
 

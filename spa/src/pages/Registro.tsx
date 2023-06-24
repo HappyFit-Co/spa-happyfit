@@ -1,11 +1,13 @@
-import { CakeOutlined, Lock, Mail, MonitorWeightOutlined, Padding, Person, StraightenOutlined } from '@mui/icons-material';
+import { CakeOutlined, Lock, Mail, MonitorWeightOutlined, Person, StraightenOutlined } from '@mui/icons-material';
 import { Avatar, Box, Button, FormControl, FormControlLabel, FormLabel, Grid, InputAdornment, Link, Radio, RadioGroup, Slider, TextField, Typography } from '@mui/material';
 import backgroundImage from '../assets/images/fundo_academia.png';
 import logoImage from '../assets/images/logo_happy.png';
 
 
 import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext';
 
 function LinearProgressWithLabel(props: LinearProgressProps & { value: number }) {
   return (
@@ -26,6 +28,9 @@ function LinearProgressWithLabel(props: LinearProgressProps & { value: number })
 const Registro = () => {
   const TITULO_PAGINA = "HappyFit - Registre-se agora"
 
+  const { register } = useContext(AuthContext);
+  const navigate = useNavigate()
+
   useEffect(() => {
     document.title = TITULO_PAGINA
   }, []);
@@ -33,24 +38,26 @@ const Registro = () => {
   const [error, setError] = useState('')
   const [etapa, setEtapa] = useState(1)
 
-  const [nome, setNome] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
-  const [weight, setWeight] = useState('');
-  const [height, setHeight] = useState('');
+  const [weightStr, setWeight] = useState('');
+  const [heightStr, setHeight] = useState('');
   const [birthday, setBirthday] = useState('');
   const [sex, setSex] = useState('');
-  const [activityLevel, setActivityLevel] = useState('');
+  const [activity_level, setActivityLevel] = useState('moderate');
 
   const [sliderValue, setSliderValue] = useState(2); // 0: Baixo, 1: Médio, 2: Alto
-  const sliderLabels = ['inativo', 'baixo', 'moderado', 'ativo', 'Alto'];
+  const sliderLabels = ['Inativo', 'Baixo', 'Moderado', 'Ativo', 'Alto'];
 
   const handleSliderChange = (event, newValue) => {
     setSliderValue(newValue);
+    const backValues = ['inactive', 'low', 'moderate', 'active', 'high']
+    setActivityLevel(backValues[sliderValue])
   };
 
   const handleNomeChange = (event) => {
-    setNome(event.target.value);
+    setName(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -82,7 +89,7 @@ const Registro = () => {
   };
 
   function handleNextStep() {
-    if (nome === '' || email === '' || pwd === '') {
+    if (name === '' || email === '' || pwd === '') {
       setError("Preencha todos os campos")
       return
     }
@@ -107,13 +114,20 @@ const Registro = () => {
     setEtapa(1)
   }
 
-  function handleRegisterUser() {
-    // ADICIONAR VERIFICAÇÃO DOS OUTROS 2 CAMPOS (SEXO e NIVEL DE ATIVIDADE)
-    if (birthday === '' || weight === '' || height === '') {
+  async function handleRegisterUser() {
+    if (birthday === '' || weightStr === '' || heightStr === '') {
       setError("Preencha todos os campos")
       return
     }
-    console.log({ nome, email, pwd, weight, height, birthday, sex, activityLevel });
+    const weight = parseInt(weightStr)
+    const height = parseInt(heightStr)
+    console.log({ name, email, pwd, weight, height, birthday, sex, activity_level })
+    try {
+      const status = await register({ name, email, pwd, weight, height, birthday, sex, activity_level }) as any
+      navigate('/')
+    } catch(err: any) {
+      setError(err.toString())
+    }
   }
   return (
     etapa === 1 ? (
@@ -151,15 +165,17 @@ const Registro = () => {
                 }}
               />
               <Typography variant="h1" color='#666666' fontSize='4vh' fontWeight='600' paddingTop="2vh">Cadastrar</Typography>
-              <FormControl sx={{ paddingTop:"3vh"}}>
+              <FormControl sx={{ paddingTop: "3vh" }}>
                 <FormLabel>Sexo</FormLabel>
                 <RadioGroup
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="female"
+                  defaultValue="Feminino"
+                  onChange={handleSexChange}
+                  onLoad={handleSexChange}
                 >
-                  <FormControlLabel value="female" control={<Radio />} label="Feminino" />
-                  <FormControlLabel value="male" control={<Radio />} label="Masculino" />
+                  <FormControlLabel value="Feminino" control={<Radio />} label="Feminino" />
+                  <FormControlLabel value="Masculino" control={<Radio />} label="Masculino" />
                 </RadioGroup>
               </FormControl>
               <TextField
@@ -168,7 +184,7 @@ const Registro = () => {
                 variant="outlined"
                 margin='normal'
                 type='required'
-                value={nome}
+                value={name}
                 onChange={handleNomeChange}
                 InputProps={{
                   startAdornment: (
@@ -295,8 +311,8 @@ const Registro = () => {
                 key="birthday"
                 label="Data de Nascimento"
                 variant="outlined"
-                margin='normal'
-                type='required'
+                margin="normal"
+                type="date"
                 value={birthday}
                 onChange={handleBirthdayChange}
                 InputProps={{
@@ -312,11 +328,11 @@ const Registro = () => {
               />
               <TextField
                 id="altura-field"
-                label="Altura"
+                label="Altura (cm)"
                 variant="outlined"
                 margin='normal'
                 type='required'
-                value={height}
+                value={heightStr}
                 onChange={handleHeightChange}
                 InputProps={{
                   startAdornment: (
@@ -331,11 +347,11 @@ const Registro = () => {
               />
               <TextField
                 id="peso-field"
-                label="Peso"
+                label="Peso (kg)"
                 variant="outlined"
                 margin='normal'
-                type='password'
-                value={weight}
+                type='required'
+                value={weightStr}
                 onChange={handleWeightChange}
                 InputProps={{
                   startAdornment: (
