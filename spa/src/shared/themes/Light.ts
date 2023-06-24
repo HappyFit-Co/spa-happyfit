@@ -22,5 +22,6 @@ export const LightTheme = createTheme({
             paper: '#f5f5fa',
             default: '#f5f5fa',
         }
+       
     }
 });

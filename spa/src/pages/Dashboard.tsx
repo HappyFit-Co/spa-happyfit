@@ -72,7 +72,7 @@ const Dashboard = () => {
         <>
             <AppBar position="static" sx={{
                 background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 16.58%, rgba(0, 0, 0, 0.38) 61.67%, #F5F5FA 88.61%), url(https://cdn.discordapp.com/attachments/1091817942695555182/1118272368633192520/image.png)',
-                height: '40vh',
+                height: '60vh',
                 backgroundSize: 'cover',
                 boxShadow: 'none'
                 }}>
@@ -104,7 +104,9 @@ const Dashboard = () => {
                         >
                         <AccountCircle />
                     </IconButton>
+                    
                 </Toolbar>
+                
             </AppBar>
             {renderMenu}
 
@@ -189,13 +191,11 @@ const Dashboard = () => {
                             '& .MuiLinearProgress-barColorPrimary': {
                               backgroundColor: '#FDA17A',}
                         }} />
+
                   </Box>
              </Box>
-             <Box height='100vh' sx={{
-             }}>
 
-             </Box>
-        </>
+      </>
     );
 };
 
