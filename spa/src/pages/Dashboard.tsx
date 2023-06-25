@@ -6,7 +6,7 @@ import foodImage from '../assets/images/calories.png';
 import gymImage from '../assets/images/gym.png';
 import waterImage from '../assets/images/water.png';
 import { AuthContext } from "../contexts/AuthContext";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
+import BarChartComponent from "../shared/layouts/Graficos";
 
 
 const Dashboard = () => {
@@ -72,31 +72,16 @@ const Dashboard = () => {
       );
 
       const data = [
-        { name: 'Janeiro', vendas: 4000 },
-        { name: 'Fevereiro', vendas: 3000 },
-        { name: 'Março', vendas: 2000 },
-        { name: 'Abril', vendas: 2780 },
-        { name: 'Maio', vendas: 1890 },
-        { name: 'Junho', vendas: 2390 },
-        { name: 'Julho', vendas: 3490 },
-        { name: 'Agosto', vendas: 3000 },
-        { name: 'Setembro', vendas: 2000 },
-        { name: 'Outubro', vendas: 2780 },
-        { name: 'Novembro', vendas: 1890 },
-        { name: 'Dezembro', vendas: 2390 },
+        { name: 'Domingo', value: 5 },
+        { name: 'Segunda', value: 2 },
+        { name: 'Terça', value: 1 },
+        { name: 'Quarta', value: 0.56 },
+        { name: 'Quinta', value: 5 },
+        { name: 'Sexta', value: 3 },
+        { name: 'Sábado', value: 3 },   
       ];
-      function BarChartComponent() {
-        return (
-          <BarChart width={600} height={300} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="vendas" fill="#8884d8" />
-          </BarChart>
-        );
-      }
+      
+
     return (
         <>
         <Box>
@@ -259,30 +244,69 @@ const Dashboard = () => {
             </AppBar>
 
             <Box display='flex' justifyContent='center' sx={{margin:'50vh 0'}}>
-                  <Box width='145vh' padding='3vh' borderRadius='3vh'
+                <Box width='145vh' padding='3vh' borderRadius='3vh'
                     sx={{
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
-                        <Typography fontWeight='800' fontSize='32px'
+                        <Typography fontWeight='800' fontSize='32px' marginBottom='1vh'
                            sx={{
                               color:"#484848"
                             }}>
                            Seu desempenho
                         </Typography>
-                        <Typography fontWeight='18px' fontSize='18px' color='#484848' align="center">
-                             Para ter uma vida saudável, é importante manter uma alimentação equilibrada, 
-                             comendo alimentos nutritivos e evitando excessos. Além disso, é essencial praticar 
-                             exercícios regularmente, seja por meio de atividades físicas ou simplesmente se 
-                             movimentando mais no dia a dia. 
-                        </Typography>
-                      
-                  </Box>
-                  <BarChartComponent />
+
+                        <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh'
+                        sx={{justifyContent:'space-around', 
+                        boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                        backgroundColor:"#184C50"}}>
+                            <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                              <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
+                                  Consumo de água 
+                              </Typography>
+                              <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                  Gráfico de hidratação semanal em Litros.                       
+                              </Typography> 
+                              <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                  Sua meta de hidratação diária é de X Litros de água.                       
+                              </Typography> 
+                            
+                            </Box>    
+                            
+                            <Box display='flex' justifyContent='right'>
+                              <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
+                            </Box>
+                                               
+                        </Box>
+
+                        <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh' marginTop='4vh'
+                        sx={{justifyContent:'space-around', 
+                        boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                        backgroundColor:"#2C2C2C"}}>
+                            <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                              <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
+                                  Frequência de treino 
+                              </Typography>
+                              <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                  Gráfico de hidratação semanal em Litros.                       
+                              </Typography> 
+                              <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                  Sua meta de hidratação diária é de X Litros de água.                       
+                              </Typography> 
+                            
+                            </Box>    
+                            
+                            <Box display='flex' justifyContent='right'>
+                              <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
+                            </Box>
+                                               
+                        </Box>
                 </Box>
+                
+            </Box>
             {renderMenu}
 
-            </Box>             
+        </Box>             
       </>
     );
 };
