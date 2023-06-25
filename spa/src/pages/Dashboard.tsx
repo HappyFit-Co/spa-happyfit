@@ -1,5 +1,5 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Divider, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import foodImage from '../assets/images/calories.png';
@@ -81,6 +81,69 @@ const Dashboard = () => {
         { name: 'Sábado', value: 3 },
       ];
 
+      const listaExercicios = [
+        {
+          nome: 'Exercício 1',
+          imagem: 'https://example.com/imagem1.jpg',
+          descricao: 'Descrição do exercício 1...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+        {
+          nome: 'Exercício 2',
+          imagem: 'https://example.com/imagem2.jpg',
+          descricao: 'Descrição do exercício 2...',
+        },
+
+      ];
 
     return (
         <>
@@ -398,13 +461,52 @@ const Dashboard = () => {
                             </Box>
 
                             <Box display='flex' justifyContent='right'>
-
-
                             </Box>
-
                         </Box>
                 </Box>
-
+            </Box>
+            <Divider/>
+            <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
+                <Box maxWidth='168vh' padding='3vh' borderRadius='3vh'
+                    sx={{
+                      backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
+                      boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                      backgroundColor:"white"
+                    }}>
+                        <Typography fontWeight='800' fontSize='32px' marginBottom='3vh'
+                           sx={{
+                              color:"#484848"
+                            }}>
+                           Exercícios
+                        </Typography>
+                        <Box display='flex' columnGap='5vh' flexWrap='wrap' rowGap='5vh'>
+                        {listaExercicios.map((exercicio, index) => {
+                            return (
+                              <Box
+                                key={index}
+                                width='50vh'
+                                padding='1vh'
+                                borderRadius='3vh'
+                                sx={{
+                                  boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                                  backgroundImage: 'linear-gradient(to bottom right, #58DE8E, #A1CDE7)',
+                                  backgroundColor: "#6DB7FC"
+                                }}
+                              >
+                                <Typography marginLeft='2vh' fontSize='18px' fontWeight='600' padding='1vh' color='white'>
+                                  {exercicio.nome}
+                                </Typography>
+                                <Box alignItems='center' display='flex' columnGap='3vh' padding='2vh 0 2vh 2vh' borderRadius='2vh' margin='0 2vh 1vh 2vh' sx={{ backgroundColor: 'white' }}>
+                                  <Avatar src={exercicio.imagem} sx={{ width: '8vh', height: '8vh' }} />
+                                  <Typography width='100%' textAlign='left' sx={{ overflowY: 'scroll', height: '15vh' }}>
+                                    {exercicio.descricao}
+                                  </Typography>
+                                </Box>
+                              </Box>
+                            );
+                          })}
+                        </Box>
+                </Box>
             </Box>
             {renderMenu}
 
