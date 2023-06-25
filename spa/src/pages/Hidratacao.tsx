@@ -1,18 +1,24 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Checkbox, FormControl, IconButton, InputAdornment, InputLabel, LinearProgress, Menu, MenuItem, Select, SelectChangeEvent, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
-import foodImage from '../assets/images/calories.png';
 import waterImage from '../assets/images/water.png';
 import { AuthContext } from "../contexts/AuthContext";
 import BarChartComponent from "../shared/layouts/Graficos";
 import backgroundImage from '../assets/images/fundo_agua.png';
+import * as React from 'react';
+
 
 const Hidratacao = () => {
-
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
+    const [hora, setHora] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+      setHora(event.target.value);
+    };
     const {logout} = useContext(AuthContext);
 
     function handleLogout(){
@@ -84,7 +90,7 @@ const Hidratacao = () => {
     return (
 
     <>
-    <Box>
+    <Box sx={{backgroundColor:'#F5F5FA'}}>
         <AppBar position="static" sx={{
             backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.1) 16.58%, rgba(0, 0, 0, 0.38) 61.67%, #F5F5FA 88.61%), url(${backgroundImage})`,
             height: '100vh',
@@ -213,13 +219,8 @@ const Hidratacao = () => {
 </Box>
 </Box>
         </AppBar>
-        <Box display='flex' justifyContent='center' marginTop='40vh' >
-
-        </Box>
-
-
     <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
-<Box width='145vh' padding='3vh' borderRadius='3vh'
+        <Box width='145vh' padding='3vh' borderRadius='3vh'
     sx={{
       backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
@@ -247,13 +248,71 @@ const Hidratacao = () => {
             <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
                 Sua meta de hidratação diária é de X Litros de água.
             </Typography>
-
           </Box>
 
           <Box display='flex' justifyContent='right'>
             <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
           </Box>
-</Box>
+        </Box>
+
+        <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh' marginTop='4vh'
+          sx={{justifyContent:'space-around',
+          boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+          backgroundColor:"#184C50"}}>
+
+          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="left">
+                Notificação de lembrete
+            </Typography>
+            <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                Selecione os horários para as notificações de lembrete de hidratação.
+            </Typography>
+          </Box>
+          <Box>
+          <FormControl sx={{ m: 1, minWidth: 100}}>
+            <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: 'orange' }}>Horário</InputLabel>
+            <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            value={hora}
+            onChange={handleChange}
+            autoWidth
+            label="Age"
+            sx={{ '& .MuiSelect-select': { color: 'orange' }, '& .MuiSvgIcon-root': { color: 'whiite' }, minWidth: 100}}
+            >
+            <MenuItem value="">
+                <em>Nenhum</em>
+            </MenuItem>
+            <MenuItem value={1}>00:00h</MenuItem>
+            <MenuItem value={2}>1:00h</MenuItem>
+            <MenuItem value={3}>2:00h</MenuItem>
+            <MenuItem value={4}>3:00h</MenuItem>
+            <MenuItem value={5}>4:00h</MenuItem>
+            <MenuItem value={6}>5:00h</MenuItem>
+            <MenuItem value={7}>6:00h</MenuItem>
+            <MenuItem value={8}>7:00h</MenuItem>
+            <MenuItem value={9}>8:00h</MenuItem>
+            <MenuItem value={10}>9:00h</MenuItem>
+            <MenuItem value={11}>10:00h</MenuItem>
+            <MenuItem value={12}>11:00h</MenuItem>
+            <MenuItem value={13}>12:00h</MenuItem>
+            <MenuItem value={14}>13:00h</MenuItem>
+            <MenuItem value={15}>14:00h</MenuItem>
+            <MenuItem value={16}>15:00h</MenuItem>
+            <MenuItem value={17}>16:00h</MenuItem>
+            <MenuItem value={18}>17:00h</MenuItem>
+            <MenuItem value={19}>18:00h</MenuItem>
+            <MenuItem value={20}>19:00h</MenuItem>
+            <MenuItem value={21}>20:00h</MenuItem>
+            <MenuItem value={22}>21:00h</MenuItem>
+            <MenuItem value={23}>22:00h</MenuItem>
+            <MenuItem value={24}>23:00h</MenuItem>
+            </Select>
+        </FormControl>
+        <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Adicionar</Button>
+          </Box>
+        
+        </Box>
 
 </Box>
 {renderMenu}
