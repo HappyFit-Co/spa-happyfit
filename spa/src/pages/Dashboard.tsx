@@ -1,9 +1,12 @@
-import { AccountCircle } from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, IconButton, LinearProgress, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { AccountCircle} from "@mui/icons-material";
+import { AppBar, Avatar, Box, Button, Grid, IconButton, LinearProgress, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material";
+import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import foodImage from '../assets/images/calories.png';
+import gymImage from '../assets/images/gym.png';
+import waterImage from '../assets/images/water.png';
 import { AuthContext } from "../contexts/AuthContext";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 
 const Dashboard = () => {
@@ -68,11 +71,38 @@ const Dashboard = () => {
         `
       );
 
+      const data = [
+        { name: 'Janeiro', vendas: 4000 },
+        { name: 'Fevereiro', vendas: 3000 },
+        { name: 'Março', vendas: 2000 },
+        { name: 'Abril', vendas: 2780 },
+        { name: 'Maio', vendas: 1890 },
+        { name: 'Junho', vendas: 2390 },
+        { name: 'Julho', vendas: 3490 },
+        { name: 'Agosto', vendas: 3000 },
+        { name: 'Setembro', vendas: 2000 },
+        { name: 'Outubro', vendas: 2780 },
+        { name: 'Novembro', vendas: 1890 },
+        { name: 'Dezembro', vendas: 2390 },
+      ];
+      function BarChartComponent() {
+        return (
+          <BarChart width={600} height={300} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="vendas" fill="#8884d8" />
+          </BarChart>
+        );
+      }
     return (
         <>
+        <Box>
             <AppBar position="static" sx={{
                 background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 16.58%, rgba(0, 0, 0, 0.38) 61.67%, #F5F5FA 88.61%), url(https://cdn.discordapp.com/attachments/1091817942695555182/1118272368633192520/image.png)',
-                height: '60vh',
+                height: '80vh',
                 backgroundSize: 'cover',
                 boxShadow: 'none'
                 }}>
@@ -88,9 +118,10 @@ const Dashboard = () => {
                             alignSelf: "center"
                         }}/>
                     <Box sx={{}}>
-                    <Button color="inherit">Opção 1</Button>
-                    <Button color="inherit">Opção 2</Button>
-                    <Button color="inherit">Opção 3</Button>
+                    <Button sx={{color: '#FDA17A'}}>Início</Button>
+                    <Button color="inherit">Hidratação</Button>
+                    <Button color="inherit">Treino</Button>
+                    <Button color="inherit">Dieta</Button>
                     </Box>
 
                     <IconButton
@@ -106,17 +137,28 @@ const Dashboard = () => {
                     </IconButton>
                     
                 </Toolbar>
-                
-            </AppBar>
-            {renderMenu}
-
-            <Box display='flex' justifyContent='center' sx={{backgroundColor:'#F5F5FA',  margin:'10vh 0' }}>
+                <Box display='flex' justifyContent='center' sx={{marginTop:'30vh'}}>
+                  <Box width='145vh' height="30hv" padding='3vh' borderRadius='3vh'
+                    sx={{
+                      boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                      backgroundColor:"white"
+                    }}>
+                        <Typography fontWeight='18px' fontSize='18px' color='#484848' align="center">
+                             Para ter uma vida saudável, é importante manter uma alimentação equilibrada, 
+                             comendo alimentos nutritivos e evitando excessos. Além disso, é essencial praticar 
+                             exercícios regularmente, seja por meio de atividades físicas ou simplesmente se 
+                             movimentando mais no dia a dia. 
+                        </Typography>
+                      
+                  </Box>
+                </Box>
+              <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
                   <Box width='45vh' padding='3vh' borderRadius='3vh'
                     sx={{
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
-                        <Typography fontSize='18px'> Você Bebeu </Typography>
+                        <Typography fontSize='18px' color='#484848'> Você Bebeu </Typography>
                         <Typography fontWeight='800' fontSize='32px'
                            sx={{
                               background: 'linear-gradient(to right, #70A4E0, #D9ADE9)',
@@ -125,6 +167,16 @@ const Dashboard = () => {
                             }}>
                            XL de água
                         </Typography>
+                        <Avatar
+                        alt="Logo"
+                        src={waterImage}
+                        variant="rounded"
+                        sx={{
+                            marginTop: '0.5vh',
+                            width: 'fit-content',
+                            height: 'fit-content',
+                            alignSelf: "center"
+                        }}/>
                         <StyledLinearProgress variant="determinate" value={50}
                         sx={{
                             height: '3vh',
@@ -140,7 +192,7 @@ const Dashboard = () => {
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
-                        <Typography fontSize='18px'> Treinos de </Typography>
+                        <Typography fontSize='18px' color='#484848'> Treinos de </Typography>
                         <Typography fontWeight='800' fontSize='32px'
                           sx={{
                             background: 'linear-gradient(to right, #58DE8E, #A1CDE7)',
@@ -149,6 +201,16 @@ const Dashboard = () => {
                           }}>
                            X feira
                         </Typography>
+                        <Avatar
+                        alt="Logo"
+                        src={gymImage}
+                        variant="rounded"
+                        sx={{
+                            marginTop: '0.5vh',
+                            width: 'fit-content',
+                            height: 'fit-content',
+                            alignSelf: "center"
+                        }}/>
                         <StyledLinearProgress variant="determinate" value={50}
                         sx={{
                             height: '3vh',
@@ -164,7 +226,7 @@ const Dashboard = () => {
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
-                        <Typography fontSize='18px' > Você Consumiu </Typography>
+                        <Typography fontSize='18px' color='#484848'> Você Consumiu </Typography>
                         <Typography fontWeight='800' fontSize='32px'
                            sx={{
                               background: 'linear-gradient(to right, #FDA17A, #FAE743)',
@@ -194,7 +256,33 @@ const Dashboard = () => {
 
                   </Box>
              </Box>
+            </AppBar>
 
+            <Box display='flex' justifyContent='center' sx={{margin:'50vh 0'}}>
+                  <Box width='145vh' padding='3vh' borderRadius='3vh'
+                    sx={{
+                      boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                      backgroundColor:"white"
+                    }}>
+                        <Typography fontWeight='800' fontSize='32px'
+                           sx={{
+                              color:"#484848"
+                            }}>
+                           Seu desempenho
+                        </Typography>
+                        <Typography fontWeight='18px' fontSize='18px' color='#484848' align="center">
+                             Para ter uma vida saudável, é importante manter uma alimentação equilibrada, 
+                             comendo alimentos nutritivos e evitando excessos. Além disso, é essencial praticar 
+                             exercícios regularmente, seja por meio de atividades físicas ou simplesmente se 
+                             movimentando mais no dia a dia. 
+                        </Typography>
+                      
+                  </Box>
+                  <BarChartComponent />
+                </Box>
+            {renderMenu}
+
+            </Box>             
       </>
     );
 };
