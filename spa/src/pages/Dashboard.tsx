@@ -1,5 +1,5 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Checkbox, Grid, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import foodImage from '../assets/images/calories.png';
@@ -97,16 +97,16 @@ const Dashboard = () => {
                         src={logoImage}
                         variant="rounded"
                         sx={{
-                            marginTop: '2vh',
+                            marginTop: '5vh',
                             width: 'fit-content',
                             height: '8vh',
                             alignSelf: "center"
                         }}/>
                     <Box sx={{}}>
-                    <Button sx={{color: '#FDA17A'}}>Início</Button>
-                    <Button color="inherit">Hidratação</Button>
-                    <Button color="inherit">Treino</Button>
-                    <Button color="inherit">Dieta</Button>
+                    <Button sx={{fontSize:'18px', color: '#FDA17A'}}>Início</Button>
+                    <Button color="inherit" sx={{fontSize:'18px'}}>Hidratação</Button>
+                    <Button color="inherit" sx={{fontSize:'18px'}}>Treino</Button>
+                    <Button color="inherit" sx={{fontSize:'18px'}}>Dieta</Button>
                     </Box>
 
                     <IconButton
@@ -124,6 +124,7 @@ const Dashboard = () => {
                 <Box display='flex' justifyContent='center' sx={{marginTop:'30vh'}}>
                   <Box width='145vh' height="30hv" padding='3vh' borderRadius='3vh'
                     sx={{
+
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
@@ -139,6 +140,7 @@ const Dashboard = () => {
               <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
                   <Box width='45vh' padding='3vh' borderRadius='3vh'
                     sx={{
+                      backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
@@ -173,6 +175,7 @@ const Dashboard = () => {
 
                   <Box width='45vh' margin='0 5vh' padding='3vh' borderRadius='3vh'
                     sx={{
+                      backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
@@ -206,7 +209,7 @@ const Dashboard = () => {
                   </Box>
                   <Box width='45vh' padding='3vh' borderRadius='3vh'
                     sx={{
-                      backgroundImage: 'linear-gradient(to bottom right, #FFFFFF, #EDEDF3)',
+                      backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
@@ -241,9 +244,10 @@ const Dashboard = () => {
                   </Box>
              </Box>
             </AppBar>
-            <Box display='flex' justifyContent='center' marginTop='50vh' >
+            <Box display='flex' justifyContent='center' marginTop='40vh' >
               <Box width='145vh' alignSelf='center'  padding='3vh' borderRadius='3vh'
                       sx={{
+                        backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
                         boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                         backgroundColor:"white"
                       }}>
@@ -317,6 +321,7 @@ const Dashboard = () => {
             <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
                 <Box width='145vh' padding='3vh' borderRadius='3vh'
                     sx={{
+                      backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                       backgroundColor:"white"
                     }}>
@@ -327,29 +332,53 @@ const Dashboard = () => {
                            Seu desempenho
                         </Typography>
 
-                            <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh'
-                            sx={{justifyContent:'space-around',
-                            boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
-                            backgroundColor:"#184C50"}}>
+                        <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh'
+                          sx={{justifyContent:'space-around',
+                          boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                          backgroundColor:"#184C50"}}>
 
-                            <Box style={{ display: 'flex', flexDirection: 'column' }}>
-                              <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
-                                  Consumo de água
-                              </Typography>
-                              <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                                  Gráfico de hidratação semanal em Litros.
-                              </Typography>
-                              <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                                  Sua meta de hidratação diária é de X Litros de água.
-                              </Typography>
+                          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                            <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
+                                Consumo de água
+                            </Typography>
+                            <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                Gráfico de hidratação semanal em Litros.
+                            </Typography>
+                            <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                Sua meta de hidratação diária é de X Litros de água.
+                            </Typography>
 
-                            </Box>
+                          </Box>
 
-                            <Box display='flex' justifyContent='right'>
-                              <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
-                            </Box>
+                          <Box display='flex' justifyContent='right'>
+                            <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
+                          </Box>
 
-                        </Box>
+                          </Box>
+
+                          <Box display='flex' justifyContent='center' marginTop='5vh' borderRadius='3vh' padding='3vh'
+                          sx={{justifyContent:'space-around',
+                          boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                          backgroundColor:"#501818"}}>
+
+                          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+                            <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
+                                Consumo de Caloria
+                            </Typography>
+                            <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                Gráfico de alimentação semanal em Calorias.
+                            </Typography>
+                            <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
+                                Sua meta de consumo diária é de X calorias.
+                            </Typography>
+
+                          </Box>
+
+                          <Box display='flex' justifyContent='right'>
+                            <BarChartComponent data={data} color="white" fillColor="#ffbfbf" limite={6} tick={7}/>
+                          </Box>
+
+                          </Box>
 
                         <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh' marginTop='4vh'
                         sx={{justifyContent:'space-around',
