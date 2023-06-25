@@ -1,5 +1,5 @@
 import { AccountCircle} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Grid, IconButton, LinearProgress, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Checkbox, Grid, IconButton, LinearProgress, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import foodImage from '../assets/images/calories.png';
@@ -115,7 +115,6 @@ const Dashboard = () => {
                         aria-label="account of current user"
                         onClick={handleProfileMenuOpen}
                         aria-haspopup="true"
-
                         color="inherit"
                         >
                         <AccountCircle />
@@ -297,7 +296,8 @@ const Dashboard = () => {
                             </Box>    
                             
                             <Box display='flex' justifyContent='right'>
-                              <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
+
+
                             </Box>
                                                
                         </Box>
