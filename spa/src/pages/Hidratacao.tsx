@@ -1,5 +1,5 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Checkbox, FormControl, IconButton, InputAdornment, InputLabel, LinearProgress, Menu, MenuItem, Select, SelectChangeEvent, styled, TextField, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, FormControl, IconButton, InputAdornment, InputLabel, LinearProgress, Menu, MenuItem, Select, SelectChangeEvent, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import waterImage from '../assets/images/water.png';
@@ -10,7 +10,7 @@ import * as React from 'react';
 
 
 const Hidratacao = () => {
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
@@ -251,7 +251,7 @@ const Hidratacao = () => {
           </Box>
 
           <Box display='flex' justifyContent='right'>
-            <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
+            <BarChartComponent data={data} color="white" fillColor="#6DB7FC" limite={6} tick={7}/>
           </Box>
         </Box>
 
@@ -270,7 +270,7 @@ const Hidratacao = () => {
           </Box>
           <Box>
           <FormControl sx={{ m: 1, minWidth: 100}}>
-            <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: 'orange' }}>Horário</InputLabel>
+            <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: '#6DB7FC' }}>Horário</InputLabel>
             <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -278,7 +278,7 @@ const Hidratacao = () => {
             onChange={handleChange}
             autoWidth
             label="Age"
-            sx={{ '& .MuiSelect-select': { color: 'orange' }, '& .MuiSvgIcon-root': { color: 'whiite' }, minWidth: 100}}
+            sx={{ '& .MuiSelect-select': { color: '#ffffff' }, '& .MuiSvgIcon-root': { color: '#fffff' }, minWidth: 100}}
             >
             <MenuItem value="">
                 <em>Nenhum</em>
@@ -309,7 +309,7 @@ const Hidratacao = () => {
             <MenuItem value={24}>23:00h</MenuItem>
             </Select>
         </FormControl>
-        <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Adicionar</Button>
+        <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>Adicionar</Button>
           </Box>
         
         </Box>
