@@ -25,7 +25,7 @@ export const AppRoutes = () => {
             <Route path="/dashboard" element={<PrivadoHook Page={Dashboard} />} />
             <Route path="/register" element={<PublicoHook Page={Registro} />} />
             <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/hidratacao" element={<PrivadoHook Page={Hidratacao} />} />
+            <Route path="/hidratacao" element={<PublicoHook Page={Hidratacao} />} />
             <Route path="/treinamento" element={<PrivadoHook Page={Treinamento} />} />
             <Route path="/nutricao" element={<PrivadoHook Page={Nutricao} />} />
             <Route path="/informacoes" element={<PublicoHook Page={Informacoes} />} />
