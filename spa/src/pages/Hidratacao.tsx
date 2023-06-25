@@ -1,11 +1,12 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Checkbox, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Checkbox, FormControl, IconButton, InputAdornment, InputLabel, LinearProgress, Menu, MenuItem, Select, SelectChangeEvent, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import waterImage from '../assets/images/water.png';
 import { AuthContext } from "../contexts/AuthContext";
 import BarChartComponent from "../shared/layouts/Graficos";
 import backgroundImage from '../assets/images/fundo_agua.png';
+import * as React from 'react';
 
 
 const Hidratacao = () => {
@@ -13,6 +14,11 @@ const Hidratacao = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+      setAge(event.target.value);
+    };
     const {logout} = useContext(AuthContext);
 
     function handleLogout(){
@@ -263,74 +269,24 @@ const Hidratacao = () => {
             </Typography>
           </Box>
           <Box>
-            <Box alignItems='center' style={{ display: 'flex'}}>           
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    6:00h
-                </Typography>
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    8:00h
-                </Typography>
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    9:00h
-                </Typography>
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    10:00h
-                </Typography>
-            </Box>
-            <Box alignItems='center' style={{ display: 'flex'}}>           
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    11:00h
-                </Typography>
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    12:00h
-                </Typography>
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    13:00h
-                </Typography>
-                <Checkbox
-                        {...label}
-                        defaultChecked
-                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-                    />
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
-                    14:00h
-                </Typography>
-            </Box>
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <InputLabel id="demo-simple-select-autowidth-label">Horário</InputLabel>
+            <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            value={age}
+            onChange={handleChange}
+            autoWidth
+            label="Age"
+            >
+            <MenuItem value="">
+                <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Twenty</MenuItem>
+            <MenuItem value={21}>Twenty one</MenuItem>
+            <MenuItem value={22}>Twenty one and a half</MenuItem>
+            </Select>
+        </FormControl>
           </Box>
         
         </Box>
