@@ -1,5 +1,5 @@
-import { AccountCircle} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Checkbox, Grid, IconButton, LinearProgress, Menu, MenuItem, styled, Toolbar, Typography } from "@mui/material";
+import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
+import { AppBar, Avatar, Box, Button, Checkbox, Grid, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import foodImage from '../assets/images/calories.png';
@@ -78,9 +78,9 @@ const Dashboard = () => {
         { name: 'Quarta', value: 0.56 },
         { name: 'Quinta', value: 5 },
         { name: 'Sexta', value: 3 },
-        { name: 'Sábado', value: 3 },   
+        { name: 'Sábado', value: 3 },
       ];
-      
+
 
     return (
         <>
@@ -119,7 +119,7 @@ const Dashboard = () => {
                         >
                         <AccountCircle />
                     </IconButton>
-                    
+
                 </Toolbar>
                 <Box display='flex' justifyContent='center' sx={{marginTop:'30vh'}}>
                   <Box width='145vh' height="30hv" padding='3vh' borderRadius='3vh'
@@ -128,12 +128,12 @@ const Dashboard = () => {
                       backgroundColor:"white"
                     }}>
                         <Typography fontWeight='18px' fontSize='18px' color='#484848' align="center">
-                             Para ter uma vida saudável, é importante manter uma alimentação equilibrada, 
-                             comendo alimentos nutritivos e evitando excessos. Além disso, é essencial praticar 
-                             exercícios regularmente, seja por meio de atividades físicas ou simplesmente se 
-                             movimentando mais no dia a dia. 
+                             Para ter uma vida saudável, é importante manter uma alimentação equilibrada,
+                             comendo alimentos nutritivos e evitando excessos. Além disso, é essencial praticar
+                             exercícios regularmente, seja por meio de atividades físicas ou simplesmente se
+                             movimentando mais no dia a dia.
                         </Typography>
-                      
+
                   </Box>
                 </Box>
               <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
@@ -241,8 +241,80 @@ const Dashboard = () => {
                   </Box>
              </Box>
             </AppBar>
+            <Box display='flex' justifyContent='center' marginTop='50vh' >
+              <Box width='145vh' alignSelf='center'  padding='3vh' borderRadius='3vh'
+                      sx={{
+                        boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                        backgroundColor:"white"
+                      }}>
+                          <Typography fontWeight='800' fontSize='32px' marginBottom='1vh'
+                            sx={{
+                                color:"#484848"
+                              }}>
+                            Seus valores diários
+                          </Typography>
+                          <Box display='flex' columnGap='5vh'>
+                             <Box width='40vh' padding='1vh' borderRadius='1vh'sx={{
+                                    backgroundImage: 'linear-gradient(to bottom right, #70A3DF, #C173DC)',
+                                    backgroundColor:"#6DB7FC"
+                                  }}>
+                                    <Typography fontWeight='600' padding='1vh' color='white'> Água</Typography>
+                                    <Box padding='2vh' borderRadius='1vh' sx={{backgroundColor:"white"}}>
+                                        <Typography fontWeight='500'> Definir meta</Typography>
+                                        <Typography color='#224D74' paddingBottom='1vh'> Em Litros/dia</Typography>
+                                        <TextField
+                                          id="outlined-basic"
+                                          variant="outlined"
+                                          label='Água'
+                                          margin='dense'
+                                          type='number'
+                                          InputProps={{
+                                            startAdornment: (
+                                              <InputAdornment position="start" sx={{color:"#70A3DF"}}>
+                                                <WaterDrop />
+                                              </InputAdornment>
+                                            ),
+                                          }}
+                                          sx={{
+                                            width: '100%',
+                                          }}
+                                        />
+                                    </Box>
+                              </Box>
 
-            <Box display='flex' justifyContent='center' sx={{margin:'50vh 0'}}>
+                              <Box width='40vh' padding='1vh' borderRadius='1vh'sx={{
+                                    backgroundImage: 'linear-gradient(to bottom right, #FDA17A, #FAE743)',
+                                    backgroundColor:"#6DB7FC"
+                                  }}>
+                                    <Typography fontWeight='600' padding='1vh' color='white'> Comida</Typography>
+                                    <Box padding='2vh' borderRadius='1vh' sx={{backgroundColor:"white"}}>
+                                        <Typography fontWeight='500'> Definir meta</Typography>
+                                        <Typography color='#744922' paddingBottom='1vh'> Em Calorias/dia</Typography>
+                                        <TextField
+                                          id="outlined-basic"
+                                          variant="outlined"
+                                          label='Comida'
+                                          margin='dense'
+                                          type='number'
+                                          InputProps={{
+                                            startAdornment: (
+                                              <InputAdornment position="start" sx={{color:"#FDA17A"}}>
+                                                <LocalDining />
+                                              </InputAdornment>
+                                            ),
+                                          }}
+                                          sx={{
+                                            width: '100%',
+                                          }}
+                                        />
+                                    </Box>
+                              </Box>
+                          </Box>
+              </Box>
+            </Box>
+
+
+            <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
                 <Box width='145vh' padding='3vh' borderRadius='3vh'
                     sx={{
                       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
@@ -255,58 +327,59 @@ const Dashboard = () => {
                            Seu desempenho
                         </Typography>
 
-                        <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh'
-                        sx={{justifyContent:'space-around', 
-                        boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
-                        backgroundColor:"#184C50"}}>
+                            <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh'
+                            sx={{justifyContent:'space-around',
+                            boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+                            backgroundColor:"#184C50"}}>
+
                             <Box style={{ display: 'flex', flexDirection: 'column' }}>
                               <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
-                                  Consumo de água 
+                                  Consumo de água
                               </Typography>
                               <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                                  Gráfico de hidratação semanal em Litros.                       
-                              </Typography> 
+                                  Gráfico de hidratação semanal em Litros.
+                              </Typography>
                               <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                                  Sua meta de hidratação diária é de X Litros de água.                       
-                              </Typography> 
-                            
-                            </Box>    
-                            
+                                  Sua meta de hidratação diária é de X Litros de água.
+                              </Typography>
+
+                            </Box>
+
                             <Box display='flex' justifyContent='right'>
                               <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
                             </Box>
-                                               
+
                         </Box>
 
                         <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh' marginTop='4vh'
-                        sx={{justifyContent:'space-around', 
+                        sx={{justifyContent:'space-around',
                         boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
                         backgroundColor:"#2C2C2C"}}>
                             <Box style={{ display: 'flex', flexDirection: 'column' }}>
                               <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="center">
-                                  Frequência de treino 
+                                  Frequência de treino
                               </Typography>
                               <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                                  Gráfico de hidratação semanal em Litros.                       
-                              </Typography> 
+                                  Gráfico de hidratação semanal em Litros.
+                              </Typography>
                               <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                                  Sua meta de hidratação diária é de X Litros de água.                       
-                              </Typography> 
-                            
-                            </Box>    
-                            
+                                  Sua meta de hidratação diária é de X Litros de água.
+                              </Typography>
+
+                            </Box>
+
                             <Box display='flex' justifyContent='right'>
 
 
                             </Box>
-                                               
+
                         </Box>
                 </Box>
-                
+
             </Box>
             {renderMenu}
 
-        </Box>             
+        </Box>
       </>
     );
 };
