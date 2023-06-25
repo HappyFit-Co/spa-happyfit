@@ -1,15 +1,15 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Checkbox, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, styled, TextField, Toolbar, Typography } from "@mui/material";
 import { useContext, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
-import foodImage from '../assets/images/calories.png';
 import waterImage from '../assets/images/water.png';
 import { AuthContext } from "../contexts/AuthContext";
 import BarChartComponent from "../shared/layouts/Graficos";
 import backgroundImage from '../assets/images/fundo_agua.png';
 
-const Hidratacao = () => {
 
+const Hidratacao = () => {
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
@@ -84,7 +84,7 @@ const Hidratacao = () => {
     return (
 
     <>
-    <Box>
+    <Box sx={{backgroundColor:'#F5F5FA'}}>
         <AppBar position="static" sx={{
             backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.1) 16.58%, rgba(0, 0, 0, 0.38) 61.67%, #F5F5FA 88.61%), url(${backgroundImage})`,
             height: '100vh',
@@ -213,13 +213,8 @@ const Hidratacao = () => {
 </Box>
 </Box>
         </AppBar>
-        <Box display='flex' justifyContent='center' marginTop='40vh' >
-
-        </Box>
-
-
     <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
-<Box width='145vh' padding='3vh' borderRadius='3vh'
+        <Box width='145vh' padding='3vh' borderRadius='3vh'
     sx={{
       backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
       boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
@@ -247,13 +242,98 @@ const Hidratacao = () => {
             <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
                 Sua meta de hidratação diária é de X Litros de água.
             </Typography>
-
           </Box>
 
           <Box display='flex' justifyContent='right'>
             <BarChartComponent data={data} color="white" fillColor="#BFE1FF" limite={6} tick={7}/>
           </Box>
-</Box>
+        </Box>
+
+        <Box display='flex' justifyContent='center' borderRadius='3vh' padding='3vh' marginTop='4vh'
+          sx={{justifyContent:'space-around',
+          boxShadow: '5px 5px 15px rgba(0.1, 0, 0.1, 0.2)',
+          backgroundColor:"#184C50"}}>
+
+          <Box style={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography fontWeight='600' fontSize='25px' color='#F5f5fa' align="left">
+                Notificação de lembrete
+            </Typography>
+            <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                Selecione os horários para as notificações de lembrete de hidratação.
+            </Typography>
+          </Box>
+          <Box>
+            <Box alignItems='center' style={{ display: 'flex'}}>           
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    6:00h
+                </Typography>
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    8:00h
+                </Typography>
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    9:00h
+                </Typography>
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    10:00h
+                </Typography>
+            </Box>
+            <Box alignItems='center' style={{ display: 'flex'}}>           
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    11:00h
+                </Typography>
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    12:00h
+                </Typography>
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    13:00h
+                </Typography>
+                <Checkbox
+                        {...label}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                    />
+                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='0vh 0vh 0vh 0vh' align="center">
+                    14:00h
+                </Typography>
+            </Box>
+          </Box>
+        
+        </Box>
 
 </Box>
 {renderMenu}
