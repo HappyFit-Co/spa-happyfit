@@ -14,10 +14,10 @@ const Hidratacao = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
-    const [age, setAge] = React.useState('');
+    const [hora, setHora] = React.useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
-      setAge(event.target.value);
+      setHora(event.target.value);
     };
     const {logout} = useContext(AuthContext);
 
@@ -269,22 +269,43 @@ const Hidratacao = () => {
             </Typography>
           </Box>
           <Box>
-          <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <FormControl sx={{ m: 1, minWidth: 80, maxHeight:10 }}>
             <InputLabel id="demo-simple-select-autowidth-label">Horário</InputLabel>
             <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            value={age}
+            value={hora}
             onChange={handleChange}
             autoWidth
             label="Age"
             >
             <MenuItem value="">
-                <em>None</em>
+                <em>Nenhum</em>
             </MenuItem>
-            <MenuItem value={10}>Twenty</MenuItem>
-            <MenuItem value={21}>Twenty one</MenuItem>
-            <MenuItem value={22}>Twenty one and a half</MenuItem>
+            <MenuItem value={1}>00:00h</MenuItem>
+            <MenuItem value={2}>1:00h</MenuItem>
+            <MenuItem value={3}>2:00h</MenuItem>
+            <MenuItem value={4}>3:00h</MenuItem>
+            <MenuItem value={5}>4:00h</MenuItem>
+            <MenuItem value={6}>5:00h</MenuItem>
+            <MenuItem value={7}>6:00h</MenuItem>
+            <MenuItem value={8}>7:00h</MenuItem>
+            <MenuItem value={9}>8:00h</MenuItem>
+            <MenuItem value={10}>9:00h</MenuItem>
+            <MenuItem value={11}>10:00h</MenuItem>
+            <MenuItem value={12}>11:00h</MenuItem>
+            <MenuItem value={13}>12:00h</MenuItem>
+            <MenuItem value={14}>13:00h</MenuItem>
+            <MenuItem value={15}>14:00h</MenuItem>
+            <MenuItem value={16}>15:00h</MenuItem>
+            <MenuItem value={17}>16:00h</MenuItem>
+            <MenuItem value={18}>17:00h</MenuItem>
+            <MenuItem value={19}>18:00h</MenuItem>
+            <MenuItem value={20}>19:00h</MenuItem>
+            <MenuItem value={21}>20:00h</MenuItem>
+            <MenuItem value={22}>21:00h</MenuItem>
+            <MenuItem value={23}>22:00h</MenuItem>
+            <MenuItem value={24}>23:00h</MenuItem>
             </Select>
         </FormControl>
           </Box>
