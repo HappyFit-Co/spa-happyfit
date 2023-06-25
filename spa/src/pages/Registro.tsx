@@ -121,7 +121,6 @@ const Registro = () => {
     }
     const weight = parseInt(weightStr)
     const height = parseInt(heightStr)
-    console.log({ name, email, pwd, weight, height, birthday, sex, activity_level })
     try {
       const status = await register({ name, email, pwd, weight, height, birthday, sex, activity_level }) as any
       navigate('/')
