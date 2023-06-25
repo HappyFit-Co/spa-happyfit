@@ -269,8 +269,8 @@ const Hidratacao = () => {
             </Typography>
           </Box>
           <Box>
-          <FormControl sx={{ m: 1, minWidth: 80, maxHeight:10 }}>
-            <InputLabel id="demo-simple-select-autowidth-label">Horário</InputLabel>
+          <FormControl sx={{ m: 1, minWidth: 100}}>
+            <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: 'orange' }}>Horário</InputLabel>
             <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
@@ -278,6 +278,7 @@ const Hidratacao = () => {
             onChange={handleChange}
             autoWidth
             label="Age"
+            sx={{ '& .MuiSelect-select': { color: 'orange' }, '& .MuiSvgIcon-root': { color: 'whiite' }, minWidth: 100}}
             >
             <MenuItem value="">
                 <em>Nenhum</em>
@@ -308,6 +309,7 @@ const Hidratacao = () => {
             <MenuItem value={24}>23:00h</MenuItem>
             </Select>
         </FormControl>
+        <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white' } }}>Adicionar</Button>
           </Box>
         
         </Box>
