@@ -1,5 +1,5 @@
 import { AccountCircle, LocalDining, WaterDrop } from "@mui/icons-material";
-import { AppBar, Avatar, Box, Button, Divider, IconButton, InputAdornment, LinearProgress, Link, Menu, MenuItem, TextField, Toolbar, Typography, styled } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Divider, IconButton, InputAdornment, LinearProgress, Menu, MenuItem, TextField, Toolbar, Typography, styled } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import foodImage from '../assets/images/calories.png';
 import gymImage from '../assets/images/gym.png';
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   async function carregaExercicios() {
     const response = await api.get('/exercises/') as any
-    setListaExercicios(response.data)
+    setListaExercicios(response.data.slice(0, 20))
   }
 
   function getDiaDaSemana() {
@@ -47,8 +47,8 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    carregaExercicios()
     carregarInfoDiaria()
+    carregaExercicios()
   }, [])
 
   const { logout } = useContext(AuthContext);
@@ -142,20 +142,20 @@ const Dashboard = () => {
               }} />
             <Box sx={{}}>
 
-              <Button sx={{ fontSize: '18px', color: '#FDA17A' }}>
-                <Link href="dashboard" underline="none">Início</Link>
+              <Button href="/dashboard" sx={{ fontSize: '18px', color: '#FDA17A', '&:hover': { color: '#FDA17A' } }}>
+                Início
               </Button>
 
-              <Button color="inherit" sx={{ fontSize: '18px' }}>
-                <Link href="hidratacao" underline="none">Hidratação</Link>
+              <Button href="/hidratacao" color="inherit" sx={{ fontSize: '18px', '&:hover': { color: '#FDA17A' } }}>
+                Hidratação
               </Button>
 
-              <Button color="inherit" sx={{ fontSize: '18px' }}>
-                <Link href="treinamento" underline="none">Treino</Link>
+              <Button href="/treinamento" color="inherit" sx={{ fontSize: '18px', '&:hover': { color: '#FDA17A' } }}>
+                Treino
               </Button>
-              
-              <Button color="inherit" sx={{ fontSize: '18px' }}>
-                <Link href="nutricao" underline="none">Dieta</Link>
+
+              <Button href="/nutricao" color="inherit" sx={{ fontSize: '18px', '&:hover': { color: '#FDA17A' } }}>
+                Dieta
               </Button>
 
             </Box>
@@ -495,7 +495,7 @@ const Dashboard = () => {
                         {exercicio.name}
                       </Typography>
                       <Box alignItems='center' display='flex' columnGap='3vh' padding='2vh 0 2vh 2vh' borderRadius='2vh' margin='0 2vh 1vh 2vh' sx={{ backgroundColor: 'white' }}>
-                        <Avatar src={exercicio.execution_gif} sx={{ width: '8vh', height: '8vh' }} />
+                        <Avatar src={""} sx={{ width: '8vh', height: '8vh' }} />
                         <Typography width='100%' textAlign='left' sx={{ overflowY: 'scroll', height: '15vh' }}>
                           {exercicio.description}
                         </Typography>

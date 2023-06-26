@@ -41,8 +41,7 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthProvider({ children }: AuthProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState<any>(false)
 
-
-    useEffect(() => {
+    async function loginVerify() {
         const { '@auth.token': token } = parseCookies()
 
         if (token) {
@@ -51,9 +50,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 .catch((err) => {
                     logout()
                 })
-
         }
-    }, [])
+    }
+
+    useEffect(() => {
+        loginVerify()
+    }, [isAuthenticated])
 
     async function logout() {
         try {

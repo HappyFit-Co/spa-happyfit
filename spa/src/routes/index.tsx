@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import { Dashboard, Hidratacao, Informacoes, Login, Nutricao, Registro, Treinamento } from '../pages';
+import { Dashboard, Hidratacao, Login, Nutricao, Registro, Treinamento } from '../pages';
 
 
 
@@ -10,6 +10,7 @@ export const AppRoutes = () => {
     // Componentizar
     const PrivadoHook = ({ Page }: any) => {
         const { isAuthenticated } = useContext(AuthContext);
+        console.log(isAuthenticated)
         return isAuthenticated ? <Page /> : <Navigate to="/login" />;
     }
 
@@ -28,7 +29,6 @@ export const AppRoutes = () => {
             <Route path="/hidratacao" element={<PublicoHook Page={Hidratacao} />} />
             <Route path="/treinamento" element={<PrivadoHook Page={Treinamento} />} />
             <Route path="/nutricao" element={<PrivadoHook Page={Nutricao} />} />
-            <Route path="/informacoes" element={<PublicoHook Page={Informacoes} />} />
         </Routes>
     );
 };
