@@ -45,7 +45,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const { '@auth.token': token } = parseCookies()
 
         if (token) {
-            api.get('/users/')
+            await api.get('/users/')
                 .then(setIsAuthenticated(true) as any)
                 .catch((err) => {
                     logout()
