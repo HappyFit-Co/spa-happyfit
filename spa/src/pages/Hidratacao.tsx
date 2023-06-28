@@ -16,7 +16,7 @@ const Hidratacao = () => {
     const [definirMeta, setDefinirMeta] = useState("");
     const [addConsumo, setAddConsumo] = useState("");
     const isMenuOpen = Boolean(anchorEl);
-
+    const [colorize, setColorize] = useState("");
     const [hora, setHora] = React.useState('');
 
     const [aguaDiaria, setAguaDiaria] = useState("")
@@ -31,6 +31,7 @@ const Hidratacao = () => {
 
     useEffect(() => {
       carregarInfoDiaria()
+      setColorize("#184C50");
     }, [])
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -385,7 +386,8 @@ const Hidratacao = () => {
             <MenuItem value={24}>23:00h</MenuItem>
             </Select>
         </FormControl>
-        <Button onClick={()=>{alert("Notificação definida com sucesso!")}} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>Adicionar</Button>
+        <Typography sx={{color: colorize}}>11:00h X</Typography>
+        <Button onClick={()=>{alert("Notificação definida com sucesso!"); setColorize("#f5f5fa")}} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>Adicionar</Button>
           </Box>
         
         </Box>
