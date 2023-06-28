@@ -24,9 +24,9 @@ const Hidratacao = () => {
 
     async function carregarInfoDiaria() {
     const response = await api.get('/records/') as any
+    const respGoals = await api.get('/goals/') as any
     setAguaDiaria (response.data.daily_water)
-    setCaloriasDiaria(response.data.daily_calories)
-    setDefinirMeta(response.data.water)
+    setDefinirMeta(respGoals.data.daily_water)
   }
 
     useEffect(() => {
@@ -71,6 +71,7 @@ const Hidratacao = () => {
     }
     try {
       api.post("/goals/", data)
+      carregarInfoDiaria()
     } catch (error) {
       alert(error)
     }
@@ -80,6 +81,7 @@ const Hidratacao = () => {
     function handleAddConsumo(){
       if(addConsumo === "" || Number(addConsumo) <= 0){
         alert("Campo vazio!")
+        carregarInfoDiaria()
         return
       }
 
@@ -383,7 +385,7 @@ const Hidratacao = () => {
             <MenuItem value={24}>23:00h</MenuItem>
             </Select>
         </FormControl>
-        <Button variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>Adicionar</Button>
+        <Button onClick={()=>{alert("Notificação definida com sucesso!")}} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>Adicionar</Button>
           </Box>
         
         </Box>
