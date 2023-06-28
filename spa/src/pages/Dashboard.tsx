@@ -15,12 +15,12 @@ const Dashboard = () => {
   const isMenuOpen = Boolean(anchorEl);
   const [listaExercicios, setListaExercicios] = useState<any>([])
 
-  const [aguaDiaria, setAguaDiaria] = useState()
-  const [caloriasDiaria, setCaloriasDiaria] = useState()
+  const [aguaDiaria, setAguaDiaria] = useState("")
+  const [caloriasDiaria, setCaloriasDiaria] = useState("")
 
   async function carregarInfoDiaria() {
     const response = await api.get('/records/') as any
-    setAguaDiaria(response.data.daily_water)
+    setAguaDiaria (response.data.daily_water)
     setCaloriasDiaria(response.data.daily_calories)
   }
 
@@ -110,19 +110,19 @@ const Dashboard = () => {
   );
 
   const data = [
-    { name: 'Domingo', value: 5 },
-    { name: 'Segunda', value: 2 },
-    { name: 'Terça', value: 1 },
-    { name: 'Quarta', value: 0.56 },
-    { name: 'Quinta', value: 5 },
-    { name: 'Sexta', value: 3 },
-    { name: 'Sábado', value: 3 },
+    { name: 'Domingo', value: 0 },
+    { name: 'Segunda', value: 0 },
+    { name: 'Terça', value: 0 },
+    { name: 'Quarta', value: 0 },
+    { name: 'Quinta', value: 0 },
+    { name: 'Sexta', value: 0 },
+    { name: 'Sábado', value: 0 },
   ];
 
 
   return (
     <>
-      <Box>
+      <Box sx={{backgroundColor:'#f5f5fa'}}>
         <AppBar position="static" sx={{
           background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1) 16.58%, rgba(0, 0, 0, 0.38) 61.67%, #F5F5FA 88.61%), url(https://cdn.discordapp.com/attachments/1091817942695555182/1118272368633192520/image.png)',
           height: '80vh',
@@ -298,7 +298,7 @@ const Dashboard = () => {
             </Box>
           </Box>
         </AppBar>
-        <Box display='flex' justifyContent='center' marginTop='40vh' >
+        <Box display='flex' justifyContent='center' marginTop='45vh' >
           <Box width='145vh' alignSelf='center' padding='3vh' borderRadius='3vh'
             sx={{
               backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
@@ -319,7 +319,7 @@ const Dashboard = () => {
                 <Typography fontWeight='600' padding='1vh' color='white'> Água</Typography>
                 <Box padding='2vh' borderRadius='1vh' sx={{ backgroundColor: "white" }}>
                   <Typography fontWeight='500'> Definir meta</Typography>
-                  <Typography color='#224D74' paddingBottom='1vh'> Em Litros/dia</Typography>
+                  <Typography color='#224D74' paddingBottom='1vh'> Em ml/dia</Typography>
                   <TextField
                     id="outlined-basic"
                     variant="outlined"
@@ -370,8 +370,6 @@ const Dashboard = () => {
             </Box>
           </Box>
         </Box>
-
-
         <Box display='flex' justifyContent='center' sx={{ margin: '5vh 0' }}>
           <Box width='145vh' padding='3vh' borderRadius='3vh'
             sx={{
@@ -398,10 +396,10 @@ const Dashboard = () => {
                   Consumo de água
                 </Typography>
                 <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                  Gráfico de hidratação semanal em Litros.
+                  Gráfico de hidratação semanal em ml.
                 </Typography>
                 <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                  Sua meta de hidratação diária é de X Litros de água.
+                  Sua meta de hidratação diária é de 0 Litros de água.
                 </Typography>
 
               </Box>
@@ -427,7 +425,7 @@ const Dashboard = () => {
                   Gráfico de alimentação semanal em Calorias.
                 </Typography>
                 <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                  Sua meta de consumo diária é de X calorias.
+                  Sua meta de consumo diária é de 0 calorias.
                 </Typography>
 
               </Box>
@@ -449,15 +447,12 @@ const Dashboard = () => {
                   Frequência de treino
                 </Typography>
                 <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                  Gráfico de hidratação semanal em Litros.
-                </Typography>
-                <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                  Sua meta de hidratação diária é de X Litros de água.
+                  Gráfico de Treinos semanais.
                 </Typography>
 
               </Box>
-
               <Box display='flex' justifyContent='right'>
+              <BarChartComponent data={data} color="white" fillColor="#ffbfbf" limite={6} tick={7} />
               </Box>
             </Box>
           </Box>
@@ -508,6 +503,12 @@ const Dashboard = () => {
               )}
             </Box>
           </Box>
+
+        </Box>
+        <Box alignItems='center' display='flex' justifyContent='center'>
+                <Typography>
+                  Todos os direitos reservados.
+                </Typography>
         </Box>
         {renderMenu}
 

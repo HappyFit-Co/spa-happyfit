@@ -1,20 +1,37 @@
 import { AccountCircle, LocalDining, WaterDrop} from "@mui/icons-material";
 import { AppBar, Avatar, Box, Button, FormControl, IconButton, InputAdornment, InputLabel, LinearProgress, Menu, MenuItem, Select, SelectChangeEvent, styled, TextField, Toolbar, Typography } from "@mui/material";
-import { useContext, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import logoImage from '../assets/images/logo_happy.png';
 import waterImage from '../assets/images/water.png';
 import { AuthContext } from "../contexts/AuthContext";
 import BarChartComponent from "../shared/layouts/Graficos";
 import backgroundImage from '../assets/images/fundo_agua.png';
 import * as React from 'react';
+import { api } from "../services/apiClient";
 
 
 const Hidratacao = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [definirMeta, setDefinirMeta] = useState("");
+    const [addConsumo, setAddConsumo] = useState("");
     const isMenuOpen = Boolean(anchorEl);
 
     const [hora, setHora] = React.useState('');
+
+    const [aguaDiaria, setAguaDiaria] = useState("")
+    const [caloriasDiaria, setCaloriasDiaria] = useState("")
+
+    async function carregarInfoDiaria() {
+    const response = await api.get('/records/') as any
+    setAguaDiaria (response.data.daily_water)
+    setCaloriasDiaria(response.data.daily_calories)
+    setDefinirMeta(response.data.water)
+  }
+
+    useEffect(() => {
+      carregarInfoDiaria()
+    }, [])
 
     const handleChange = (event: SelectChangeEvent) => {
       setHora(event.target.value);
@@ -23,6 +40,56 @@ const Hidratacao = () => {
 
     function handleLogout(){
       logout()
+    }
+
+    function handleLerMeta(event){
+      setDefinirMeta(event.target.value);
+    }
+
+    function handleLerConsumo(event){
+      setAddConsumo(event.target.value);
+    }
+
+    function handleDefinirMeta(){
+      if(definirMeta === "" || Number(definirMeta) < 0){
+        alert("Campo vazio!")
+        return
+      }
+      const data ={
+        "weight": 70.0,
+        "objective": "Força",
+        "daily_calories": 2500,
+        "daily_water": Number(definirMeta),
+        "daily_macro_nutrient": {
+            "protein": 220,
+            "carbohydrate": 50,
+            "fat": 5
+        },
+        "deadline": "2022-10-10",
+        "workout": [],
+        "diet": []
+    }
+    try {
+      api.post("/goals/", data)
+    } catch (error) {
+      alert(error)
+    }
+     
+    }
+
+    function handleAddConsumo(){
+      if(addConsumo === "" || Number(addConsumo) <= 0){
+        alert("Campo vazio!")
+        return
+      }
+
+    try {
+      api.put("/records/water/add/"+addConsumo)
+      carregarInfoDiaria()
+    } catch (error) {
+      alert(error)
+    }
+     
     }
 
     const handleMenuClose = () => {
@@ -78,13 +145,13 @@ const Hidratacao = () => {
       );
 
       const data = [
-        { name: 'Domingo', value: 5 },
-        { name: 'Segunda', value: 2 },
-        { name: 'Terça', value: 1 },
-        { name: 'Quarta', value: 0.56 },
-        { name: 'Quinta', value: 5 },
-        { name: 'Sexta', value: 3 },
-        { name: 'Sábado', value: 3 },
+        { name: 'Domingo', value: 0 },
+        { name: 'Segunda', value: 0 },
+        { name: 'Terça', value: aguaDiaria },
+        { name: 'Quarta', value: 0 },
+        { name: 'Quinta', value: 0 },
+        { name: 'Sexta', value: 0 },
+        { name: 'Sábado', value: 0 },
       ];
 
     return (
@@ -93,7 +160,7 @@ const Hidratacao = () => {
     <Box sx={{backgroundColor:'#F5F5FA'}}>
         <AppBar position="static" sx={{
             backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.1) 16.58%, rgba(0, 0, 0, 0.38) 61.67%, #F5F5FA 88.61%), url(${backgroundImage})`,
-            height: '100vh',
+            height: '80vh',
             backgroundSize: 'cover',
             boxShadow: 'none'
         }}>
@@ -109,10 +176,10 @@ const Hidratacao = () => {
             alignSelf: "center"
         }}/>
     <Box sx={{}}>
-    <Button color="inherit" sx={{fontSize:'18px'}}>Início</Button>
-    <Button color="inherit" sx={{fontSize:'18px',  color: '#FDA17A'}}>Hidratação</Button>
-    <Button color="inherit" sx={{fontSize:'18px'}}>Treino</Button>
-    <Button color="inherit" sx={{fontSize:'18px'}}>Dieta</Button>
+    <Button  href="/dashboard" color="inherit" sx={{fontSize:'18px', '&:hover': { color: '#FDA17A' } }}>Início</Button>
+    <Button href="/hidratacao" color="inherit" sx={{fontSize:'18px',  color: '#FDA17A', '&:hover': { color: '#FDA17A' } }}>Hidratação</Button>
+    <Button href="/treinamento" color="inherit" sx={{fontSize:'18px', '&:hover': { color: '#FDA17A' } }}>Treino</Button>
+    <Button href="/nutricao" color="inherit" sx={{fontSize:'18px', '&:hover': { color: '#FDA17A' } }}>Dieta</Button>
     </Box>
 
     <IconButton
@@ -141,7 +208,7 @@ const Hidratacao = () => {
               '-webkit-background-clip': 'text',
               '-webkit-text-fill-color': 'transparent'
             }}>
-           XL de água
+           {aguaDiaria + "ml"}
         </Typography>
         <Avatar
         alt="Logo"
@@ -163,17 +230,18 @@ const Hidratacao = () => {
         }} />
    </Box>
 
-<Box margin='0 10vh 0 10vh'width='40vh' height='30vh' padding='1vh' borderRadius='1vh'sx={{
+<Box margin='0 10vh 0 10vh'width='40vh' height='37vh' padding='1vh' borderRadius='1vh'sx={{
                     backgroundImage: 'linear-gradient(to bottom right, #70A3DF, #C173DC)',
                     backgroundColor:"#6DB7FC"
                   }}>
                     <Typography fontWeight='600' padding='1vh' color='white'> Meta de hidratação</Typography>
                     <Box padding='2vh' borderRadius='1vh' sx={{backgroundColor:"white"}}>
                         <Typography fontWeight='500' color="#464646"> Definir meta</Typography>
-                        <Typography color='#224D74' paddingBottom='1vh'> Em Litros/dia</Typography>
+                        <Typography color='#224D74' paddingBottom='1vh'> Em ml/dia</Typography>
                         <TextField
                           id="outlined-basic"
                           variant="outlined"
+                          onChange={handleLerMeta}
                           label='Água'
                           margin='dense'
                           type='number'
@@ -188,20 +256,24 @@ const Hidratacao = () => {
                             width: '100%',
                           }}
                         />
+                        
                     </Box>
+    <Button onClick={handleDefinirMeta} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>
+      Definir</Button>
 </Box>
-<Box width='40vh' height='30vh' padding='1vh' borderRadius='1vh'sx={{
+<Box width='40vh' height='37vh' padding='1vh' borderRadius='1vh'sx={{
                     backgroundImage: 'linear-gradient(to bottom right, #70A3DF, #C173DC)',
                     backgroundColor:"#6DB7FC"
                   }}>
                     <Typography fontWeight='600' padding='1vh' color='white'> Adicionar consumo</Typography>
                     <Box padding='2vh' borderRadius='1vh' sx={{backgroundColor:"white"}}>
                         <Typography fontWeight='500' color="#464646"> Quantidade ingerida</Typography>
-                        <Typography color='#224D74' paddingBottom='1vh'> Em Litros</Typography>
+                        <Typography color='#224D74' paddingBottom='1vh'> Em ml</Typography>
                         <TextField
                           id="outlined-basic"
                           variant="outlined"
                           label='Água'
+                          onChange={handleLerConsumo}
                           margin='dense'
                           type='number'
                           InputProps={{
@@ -216,10 +288,12 @@ const Hidratacao = () => {
                           }}
                         />
                     </Box>
+      <Button onClick={handleAddConsumo} variant="contained" sx={{ borderRadius: '20vh', height: '5vh', margin: '2vh 0 0 0', width: '100%', '&:hover': { color: 'white', backgroundColor:'#5597D5' }, backgroundColor:'#6DB7FC' }}>
+      Adicionar</Button>
 </Box>
 </Box>
         </AppBar>
-    <Box display='flex' justifyContent='center' sx={{margin:'5vh 0'}}>
+    <Box display='flex' justifyContent='center' sx={{margin:'25vh 0'}}>
         <Box width='145vh' padding='3vh' borderRadius='3vh'
     sx={{
       backgroundImage: 'linear-gradient(to bottom right, #EDEDF3, #FFFFFF)',
@@ -243,15 +317,15 @@ const Hidratacao = () => {
                 Consumo de água
             </Typography>
             <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                Gráfico de hidratação semanal em Litros.
+                Gráfico de hidratação semanal em ml.
             </Typography>
             <Typography fontWeight='400' fontSize='17px' color='#F5f5fa' margin='4vh 0vh 0vh 0vh' align="center">
-                Sua meta de hidratação diária é de X Litros de água.
+                Sua meta de hidratação diária é de {definirMeta} ml de água.
             </Typography>
           </Box>
 
           <Box display='flex' justifyContent='right'>
-            <BarChartComponent data={data} color="white" fillColor="#6DB7FC" limite={6} tick={7}/>
+            <BarChartComponent data={data} color="white" fillColor="#6DB7FC" limite={Number(definirMeta)} tick={7}/>
           </Box>
         </Box>
 
